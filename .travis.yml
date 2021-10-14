@@ -10,16 +10,12 @@ script:
 before_install:
 - yes | gem update --system --force
 - gem install bundler
-# deploy:
-#   # provider: heroku
-#   # api_key:
-#   #   secure: JdMINnKFTmPqr1IRzhTvEbkULWq/D+UhUk+CkD3vdVBsrIiJ8TDLPkYeFPx8U1otKLIefMd/RZ8zM2oaqSNYosFGGc3mjmCe2m+Nb4icSkOH4+GgaCMDi8Zso6rRNPdHeb4FuE8hYlhNPVWu6pJnK+K3u672yG0eXG4mcj90z5fcZzxJrSgB5nj7By5Slk4CZJKxeY/KSpW+4Dsqf61b9k9Jmf9oKcCLW5pFTyCJnHy0h+c3Cz31raPWs2UmT0e38zIgbBGEy1pOZysLLwPlo7kLwF7d0kJJ34FQx7KGRlxLBVXLsR+iug0F/9NpD4jnhWxZWC4huuCExQ7uP2wD7ut/YbHwhS4EST4k/A9hv/EBcDx+G4rWk0xGLpeQnR2os59D9IHnzP6jA7mhVXFBIysH7Dm7fKa8NgsAjIqJNhvGNg6GVq42x5hf3ZNn1MTW+xervK5yHl5yVCxf4tNxB9I9vCegTk3GMUO7epGLSwGHoDOERKbk33+5OTS6bTKpw2FfR5jfHIXEkuKDCG56zQEJK8hToEi5K9K6+Z5nISUTTJ+HZmmImuBHYIvfCTH3Z/yZOpa9lDTJH6l6yKobqlDJ9cHt+rWvKfTXpYIhzERhJzxiV8m/geD86Bz3l14qfTFr9QRxk4B8+ieCOCLEzj6wPw5VGHXnELMPCIN4tSY=
-#   # app: travel-buddy-api
-#   # run: rails db:migrate
-#   on:
-#     repo: your-epk/your_epk_be
-#     branch: main
-# env:
-#   global:
-
-# test
+deploy:
+  provider: heroku
+  api_key:
+    secure: hNOqUJLYOy5aB1vqX2jTeGktA55cvysuyZx25wctDfz/Ub1Dc71wsZhz0d1d4i6a9nHorpMIhU0+E9cStWmVm879lMycsvZj/Am8whnB/ERFohPmKxOMAtK+deHVAm2qHZYqxkA2eQySVARgOorAQDhoYzlIXTjeh409qPSfQQtv9cjxc2k3K91fYiNjLWLwsg3OM0eRiYuvdrDBkp53HKHdFgyeVfz+Mv1HjJhe8nEmNIh0iWKRynVJT6SL7I8VcuXe0IkO4rNiHs5GiYA9kH9Eq8orM7+Cqv9mU9tdLltb48Ce6pIFMhUlaxqX4atWK+77OZxnJMfCxAZvkMUzcPGCbRW+xU9sfjhNOtpU9TULsTuK1u5M5ajkVYu6aAoERyxMzsrby4WJPNXxGVRHfhPQA/t2W65GCjWHr2Q/HpocRtksaXPd/dF47GUJfe2Z36E4nX+e7uSrW32cUcdp5dZEBc1/FrcPbVSiDWP+dCQR5tuSRJkqJEfUjlgsJD8nKx1J7DCFQrUBA1ujl53aCUsM6t2KpSrR+OfUEa7rhvZeTZTRwMAgmJF0OgDC2E5PuF1uJT3LNU67xDY7zRACowh4ELqwfV+SpB3L5kXArSDdSMF3MvB4qDFw33cm4+zn0nihA00OszC47iUbZ6YwwFnkXVFFT/OXDmOhgLeZNUE=
+  app: epk-be
+  run: rails db:migrate
+  on:
+    repo: your-epk/your-epk-be
+    branch: main
