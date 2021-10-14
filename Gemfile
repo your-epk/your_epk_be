@@ -37,6 +37,7 @@ gem 'faraday'
 gem 'figaro'
 gem 'city-state'
 gem 'rspotify'
+gem 'carrierwave', '~> 2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
