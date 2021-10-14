@@ -4,20 +4,23 @@ rvm:
 - 1.9.3
 - jruby-19mode
 - rbx-2
-script:
-- bundle exec rails db:{create,migrate} RAILS_ENV=test
-- bundle exec rspec
-# deploy:
-#   # provider: heroku
-#   # api_key:
-#   #   secure: JdMINnKFTmPqr1IRzhTvEbkULWq/D+UhUk+CkD3vdVBsrIiJ8TDLPkYeFPx8U1otKLIefMd/RZ8zM2oaqSNYosFGGc3mjmCe2m+Nb4icSkOH4+GgaCMDi8Zso6rRNPdHeb4FuE8hYlhNPVWu6pJnK+K3u672yG0eXG4mcj90z5fcZzxJrSgB5nj7By5Slk4CZJKxeY/KSpW+4Dsqf61b9k9Jmf9oKcCLW5pFTyCJnHy0h+c3Cz31raPWs2UmT0e38zIgbBGEy1pOZysLLwPlo7kLwF7d0kJJ34FQx7KGRlxLBVXLsR+iug0F/9NpD4jnhWxZWC4huuCExQ7uP2wD7ut/YbHwhS4EST4k/A9hv/EBcDx+G4rWk0xGLpeQnR2os59D9IHnzP6jA7mhVXFBIysH7Dm7fKa8NgsAjIqJNhvGNg6GVq42x5hf3ZNn1MTW+xervK5yHl5yVCxf4tNxB9I9vCegTk3GMUO7epGLSwGHoDOERKbk33+5OTS6bTKpw2FfR5jfHIXEkuKDCG56zQEJK8hToEi5K9K6+Z5nISUTTJ+HZmmImuBHYIvfCTH3Z/yZOpa9lDTJH6l6yKobqlDJ9cHt+rWvKfTXpYIhzERhJzxiV8m/geD86Bz3l14qfTFr9QRxk4B8+ieCOCLEzj6wPw5VGHXnELMPCIN4tSY=
-#   # app: travel-buddy-api
-#   # run: rails db:migrate
-#   on:
-#     repo: your-epk/your_epk_be
-#     branch: main
-env:
-  global:
-before_install:
-  - yes | gem update --system --force
-  - gem install bundler
+# script:
+# - bundle exec rails db:{create,migrate} RAILS_ENV=test
+# - bundle exec rspec
+# # install:
+# #   - bundle install --path vendor/bundle
+# #   - npm install
+# # deploy:
+# #   # provider: heroku
+# #   # api_key:
+# #   #   secure: JdMINnKFTmPqr1IRzhTvEbkULWq/D+UhUk+CkD3vdVBsrIiJ8TDLPkYeFPx8U1otKLIefMd/RZ8zM2oaqSNYosFGGc3mjmCe2m+Nb4icSkOH4+GgaCMDi8Zso6rRNPdHeb4FuE8hYlhNPVWu6pJnK+K3u672yG0eXG4mcj90z5fcZzxJrSgB5nj7By5Slk4CZJKxeY/KSpW+4Dsqf61b9k9Jmf9oKcCLW5pFTyCJnHy0h+c3Cz31raPWs2UmT0e38zIgbBGEy1pOZysLLwPlo7kLwF7d0kJJ34FQx7KGRlxLBVXLsR+iug0F/9NpD4jnhWxZWC4huuCExQ7uP2wD7ut/YbHwhS4EST4k/A9hv/EBcDx+G4rWk0xGLpeQnR2os59D9IHnzP6jA7mhVXFBIysH7Dm7fKa8NgsAjIqJNhvGNg6GVq42x5hf3ZNn1MTW+xervK5yHl5yVCxf4tNxB9I9vCegTk3GMUO7epGLSwGHoDOERKbk33+5OTS6bTKpw2FfR5jfHIXEkuKDCG56zQEJK8hToEi5K9K6+Z5nISUTTJ+HZmmImuBHYIvfCTH3Z/yZOpa9lDTJH6l6yKobqlDJ9cHt+rWvKfTXpYIhzERhJzxiV8m/geD86Bz3l14qfTFr9QRxk4B8+ieCOCLEzj6wPw5VGHXnELMPCIN4tSY=
+# #   # app: travel-buddy-api
+# #   # run: rails db:migrate
+# #   on:
+# #     repo: your-epk/your_epk_be
+# #     branch: main
+# env:
+#   global:
+# before_install:
+#   - yes | gem update --system --force
+#   - gem install bundler
