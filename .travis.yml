@@ -16,5 +16,5 @@ deploy:
   app: epk-be
   run: rails db:migrate
   on:
-    repo: your-epk/your-epk-be
+    repo: your-epk/your_epk_be
     branch: main
