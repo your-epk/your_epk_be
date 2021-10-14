@@ -4,12 +4,13 @@ rvm:
 - 1.9.3
 - jruby-19mode
 - rbx-2
-# script:
-# - bundle exec rails db:{create,migrate} RAILS_ENV=test
-# - bundle exec rspec
-# # install:
-# #   - bundle install --path vendor/bundle
-# #   - npm install
+before_install:
+- yes | gem update --system --force
+- gem install bundler
+script:
+- bundle exec rails db:{create,migrate} RAILS_ENV=test
+- bundle exec rspec
+
 # # deploy:
 # #   # provider: heroku
 # #   # api_key:
