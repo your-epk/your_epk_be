@@ -36,6 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'faraday'
 gem 'figaro'
 gem 'carrierwave', '~> 2.0'
+gem 'fast_jsonapi'
 
 group :development, :test do
   gem 'pry'
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'orderly'
   gem 'shoulda-matchers'
   gem 'webmock'
+  gem 'vcr'
 end
 
 group :development do
