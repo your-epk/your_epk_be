@@ -37,6 +37,7 @@ gem 'faraday'
 gem 'figaro'
 gem 'carrierwave', '~> 2.0'
 gem 'fast_jsonapi'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'pry'
