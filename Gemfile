@@ -35,19 +35,17 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'faraday'
 gem 'figaro'
-gem 'city-state'
-gem 'rspotify'
 gem 'carrierwave', '~> 2.0'
+gem 'fast_jsonapi'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-
   gem 'pry'
   gem 'capybara'
   gem 'launchy'
   gem 'orderly'
   gem 'shoulda-matchers'
   gem 'webmock'
+  gem 'vcr'
 end
 
 group :development do
