@@ -27,7 +27,7 @@ Notes:
 ## Example Request
 
 ```
-GET https://epk-be.herokuapp.com/api/v1/sessions
+POST https://epk-be.herokuapp.com/api/v1/sessions
 
 body = {
     "email": "nbrissey@gmail.com",
@@ -79,10 +79,11 @@ Notes:
 ## Example Request
 
 ```
-GET https://epk-be.herokuapp.com/api/v1/movie-details
+POST https://epk-be.herokuapp.com/api/v1/movie-details
 
 body = {
       "user_id": "1",
+      "movie_title": "Jimmies Cookies",
       "genre": "horror",
       "country": "vietnam",
       "release_year": "2013",
@@ -110,6 +111,7 @@ Example 1:
         "type": "film_epk",
         "attributes": {
             "user_id": 1,
+            "movie_title": "Jimmies Cookies",
             "genre": "horror",
             "country": "vietnam",
             "release_year": "2013",
