@@ -1,7 +1,63 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/elliotolbright/turing/mod4/cap-stone/epk_api/app/mailers/application_mailer.rb": {
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/models/user.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/controllers/api/v1/sessions_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/serializers/user_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -11,16 +67,7 @@
         "branches": {
         }
       },
-      "/Users/elliotolbright/turing/mod4/cap-stone/epk_api/app/models/application_record.rb": {
-        "lines": [
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/elliotolbright/turing/mod4/cap-stone/epk_api/app/jobs/application_job.rb": {
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/jobs/application_job.rb": {
         "lines": [
           0,
           0
@@ -28,15 +75,19 @@
         "branches": {
         }
       },
-      "/Users/elliotolbright/turing/mod4/cap-stone/epk_api/app/controllers/application_controller.rb": {
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/controllers/welcome_controller.rb": {
         "lines": [
+          0,
+          null,
+          0,
+          null,
           0,
           0
         ],
         "branches": {
         }
       },
-      "/Users/elliotolbright/turing/mod4/cap-stone/epk_api/app/channels/application_cable/connection.rb": {
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
           0,
@@ -46,7 +97,7 @@
         "branches": {
         }
       },
-      "/Users/elliotolbright/turing/mod4/cap-stone/epk_api/app/channels/application_cable/channel.rb": {
+      "/Users/elliotolbright/turing/mod4/cap-stone/your_epk_be/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
           0,
@@ -57,6 +108,6 @@
         }
       }
     },
-    "timestamp": 1634080222
+    "timestamp": 1634399326
   }
 }
