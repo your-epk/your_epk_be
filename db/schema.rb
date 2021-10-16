@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_10_16_153633) do
     t.text "synopsis"
     t.string "country"
     t.string "release_year"
-    t.time "run_time"
+    t.integer "run_time"
     t.string "language"
     t.integer "budget"
     t.string "contact_name"
