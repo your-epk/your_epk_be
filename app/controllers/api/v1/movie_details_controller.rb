@@ -18,6 +18,8 @@ class Api::V1::MovieDetailsController < ApplicationController
   def film_epk_params
     params.require(:movie_detail).
       permit(:user_id, 
+             :id,
+             :movie_title,
              :genre, 
              :country, 
              :release_year, 

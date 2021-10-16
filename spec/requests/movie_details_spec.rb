@@ -11,6 +11,7 @@ RSpec.describe 'sessions API' do
     )
 
     body = { 
+      title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
       user_id: user.id,
       genre: "horror",
       country: "vietnam",
@@ -39,7 +40,7 @@ RSpec.describe 'sessions API' do
     expect(movie_detail[:data][:type]).to eq("film_epk")
     expect(movie_detail[:data]).to have_key(:attributes)
     expect(movie_detail[:data][:attributes]).to be_a(Hash)
-    expect(movie_detail[:data][:attributes].keys.count).to eq(10)
+    expect(movie_detail[:data][:attributes].keys.count).to eq(11)
     expect(movie_detail[:data][:attributes]).to have_key(:user_id)
     expect(movie_detail[:data][:attributes][:user_id]).to eq(user.id)
     expect(movie_detail[:data][:attributes]).to have_key(:genre)

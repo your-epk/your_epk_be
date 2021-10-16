@@ -2,6 +2,7 @@ class MovieDetailsSerializer
   include FastJsonapi::ObjectSerializer
   set_type :film_epk
   attributes :user_id, 
+             :movie_title,
              :genre, 
              :country, 
              :release_year, 
