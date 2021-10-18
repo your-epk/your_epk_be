@@ -70,9 +70,12 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-# VCR.configure do |config|
-#   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
-#   config.hook_into :webmock
-#   config.filter_sensitive_data('<movie_api_key>') { ENV['movie_api_key'] }
-#   config.configure_rspec_metadata!
-# end
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.filter_sensitive_data('<AWS_ACCESS_KEY_ID>') { ENV['AWS_ACCESS_KEY_ID'] }
+  config.filter_sensitive_data('<AWS_SECRET_ACCESS_KEY>') { ENV['AWS_SECRET_ACCESS_KEY'] }
+  config.filter_sensitive_data('<S3_BUCKET>') { ENV['S3_BUCKET'] }
+  config.filter_sensitive_data('<AWS_REGION>') { ENV['AWS_REGION'] }
+  config.configure_rspec_metadata!
+end
