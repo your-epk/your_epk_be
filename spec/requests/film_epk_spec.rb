@@ -24,7 +24,7 @@ RSpec.describe 'movie details API' do
       distribution: "distribution"
      }
 
-    post '/api/v1/movie-details', params: body, as: :json
+    post '/api/v1/film_epk', params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
@@ -108,7 +108,7 @@ RSpec.describe 'movie details API' do
                 movie_poster: "#{response_body1[:blob_signed_id]}"
               }
 
-      patch "/api/v1/movie-details/#{epk.id}", params: body3, as: :json
+      patch "/api/v1/film_epk/#{epk.id}", params: body3, as: :json
       response_body3 = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
