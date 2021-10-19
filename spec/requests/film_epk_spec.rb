@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe 'movie details API' do
+  before :each do
+    @user =  User.create!(
+       email: "whatever@example.com",
+       first_name: "First",
+       last_name: "Last",
+       password: "password",
+       password_confirmation: "password"
+     )
+
+     @epk = FilmEpk.create!(
+       user_id: @user.id,
+       movie_title: "The Best"
+     )
+  end
+
   it 'returns the user credentials after a succesfull login', :vcr do
    user =  User.create!(
       email: "whatever@example.com",
@@ -40,7 +55,7 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:type]).to eq("film_epk")
     expect(movie_detail[:data]).to have_key(:attributes)
     expect(movie_detail[:data][:attributes]).to be_a(Hash)
-    expect(movie_detail[:data][:attributes].keys.count).to eq(11)
+    expect(movie_detail[:data][:attributes].keys.count).to eq(12)
     expect(movie_detail[:data][:attributes]).to have_key(:user_id)
     expect(movie_detail[:data][:attributes][:user_id]).to eq(user.id)
     expect(movie_detail[:data][:attributes]).to have_key(:genre)
@@ -120,6 +135,44 @@ RSpec.describe 'movie details API' do
       expect(response_body3[:user_id]).to eq(user.id)
       expect(response_body3).to have_key(:movie_poster_url)
       expect(response_body3[:movie_poster_url]).to be_a(String)
+    end
+  end
+
+  describe "create award" do
+    it "creates an associated award record" do
+      body = {
+        film_epk: {
+          award: {
+            name: "The Super Award",
+            year: "1999",
+            award_type: "Shiny"
+          }
+        }
+      }
+
+      patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response_body).to have_key(:data)
+      expect(response_body[:data]).to be_a(Hash)
+      expect(response_body[:data].keys.count).to eq(3)
+      expect(response_body[:data]).to have_key(:id)
+      expect(response_body[:data][:id]).to eq(@epk.id.to_s)
+      expect(response_body[:data]).to have_key(:type)
+      expect(response_body[:data][:type]).to eq("film_epk")
+      expect(response_body[:data]).to have_key(:attributes)
+      expect(response_body[:data][:attributes]).to be_a(Hash)
+      expect(response_body[:data][:attributes].keys.count).to eq(12)
+      expect(response_body[:data][:attributes]).to have_key(:awards)
+      expect(response_body[:data][:attributes][:awards]).to be_an(Array)
+
+      awards = response_body[:data][:attributes][:awards]
+      expect(awards.first[:name]).to eq(body[:film_epk][:award][:name])
+      expect(awards.first[:year]).to eq(body[:film_epk][:award][:year])
+      expect(awards.first[:award_type]).to eq(body[:film_epk][:award][:award_type])
     end
   end
 end

@@ -19,8 +19,8 @@ class Api::V1::FilmEpkController < ApplicationController
       film_epk.movie_poster.attach(movie_poster)
       render json: film_epk.as_json(root: false, methods: :movie_poster_url).except('updated_at')
     end
-    # Before action - evalute if award is existing or new - call #create or #update
-    # AwardsController if award?
+
+    render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
   end
 
   private
@@ -50,6 +50,8 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_email,
              :contact_number,
              :company_name,
-             :header_image)
+             :header_image,
+             award: [:name, :year, :award_type]
+           )
   end
 end

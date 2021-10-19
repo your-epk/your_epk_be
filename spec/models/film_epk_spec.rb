@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FilmEpk do
-  describe 'associations' do 
+  describe 'relationships' do
     it { should belong_to(:user) }
-  end   
+    it { should have_many(:awards) }
+  end
 end

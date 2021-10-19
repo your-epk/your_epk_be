@@ -1,15 +1,16 @@
 class FilmEpkSerializer
   include FastJsonapi::ObjectSerializer
   set_type :film_epk
-  attributes :user_id, 
+  attributes :user_id,
              :movie_title,
-             :genre, 
-             :country, 
-             :release_year, 
-             :run_time, 
-             :language, 
-             :budget, 
-             :website, 
-             :production_company, 
-             :distribution
+             :genre,
+             :country,
+             :release_year,
+             :run_time,
+             :language,
+             :budget,
+             :website,
+             :production_company,
+             :distribution,
+             :awards
 end
