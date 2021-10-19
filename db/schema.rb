@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_041700) do
+ActiveRecord::Schema.define(version: 2021_10_19_223952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,10 +74,9 @@ ActiveRecord::Schema.define(version: 2021_10_19_041700) do
     t.string "role"
     t.string "first_name"
     t.string "last_name"
-    t.text "image"
     t.string "description"
-    t.bigint "film_epks_id"
-    t.index ["film_epks_id"], name: "index_film_fams_on_film_epks_id"
+    t.bigint "film_epk_id"
+    t.index ["film_epk_id"], name: "index_film_fams_on_film_epk_id"
   end
 
   create_table "presses", force: :cascade do |t|
@@ -100,6 +99,6 @@ ActiveRecord::Schema.define(version: 2021_10_19_041700) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "awards", "film_epks"
   add_foreign_key "film_epks", "users"
-  add_foreign_key "film_fams", "film_epks", column: "film_epks_id"
+  add_foreign_key "film_fams", "film_epks"
   add_foreign_key "presses", "film_epks", column: "film_epks_id"
 end
