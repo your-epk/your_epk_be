@@ -5,7 +5,7 @@ HTTP Verb | Endpoint              | Description                              | L
 POST       | `/api/v1/sessions` | Get a single user. | [Link](#get-user-session)
 GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | [Link](#get-user-attributes)
 POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link](#create-film-epk)
-PATCH      | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
+PATCH(not complete)     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
 PATCH      | `/api/v1/film_epk/:id` | Create film_epk awards. | [Link](#Create-film-epk-awards)
 PATCH      | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
 PATCH      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
