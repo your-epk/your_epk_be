@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'presigned url API' do
-  it 'returns the user credentials after a succesfull login', :vcr do
+  it 'returns upload link and blob_signed_id', :vcr do
 
   body = {
     file: {
