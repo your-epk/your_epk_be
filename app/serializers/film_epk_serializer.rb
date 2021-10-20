@@ -12,5 +12,6 @@ class FilmEpkSerializer
              :website,
              :production_company,
              :distribution,
-             :awards
+             :awards,
+             :film_fams
 end
