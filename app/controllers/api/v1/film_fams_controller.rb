@@ -13,5 +13,6 @@ class Api::V1::FilmFamsController < ApplicationController
 
   def update  
     fam = FilmFam.find_by(id: film_fam_params[:id])
+    fam.update(@ff_params)
   end 
 end 
