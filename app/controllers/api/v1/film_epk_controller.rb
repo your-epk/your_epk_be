@@ -18,9 +18,11 @@ class Api::V1::FilmEpkController < ApplicationController
     if !movie_poster.nil?
       film_epk.movie_poster.attach(movie_poster)
       render json: film_epk.as_json(root: false, methods: :movie_poster_url).except('updated_at')
-    end
+    end 
 
     render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
+    render json: FilmFamsController.new.check(film_epk_params[:film_fam], film_epk) if film_epk_params[:film_fam]
+
   end
 
   private
@@ -51,7 +53,8 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_number,
              :company_name,
              :header_image,
-             award: [:name, :year, :award_type]
+             award: [:name, :year, :award_type],
+             film_fam: [:role, :first_name, :last_name, :description]
            )
   end
 end
