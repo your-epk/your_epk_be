@@ -5,5 +5,7 @@ RSpec.describe FilmEpk do
     it { should belong_to(:user) }
     it { should have_many(:awards) }
     it { should have_many(:film_fams) }
+    it { should have_many(:presses) }
+
   end
 end
