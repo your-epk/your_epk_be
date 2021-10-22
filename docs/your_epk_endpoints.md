@@ -5,7 +5,8 @@ HTTP Verb | Endpoint              | Description                              | L
 POST       | `/api/v1/sessions` | Get a single user. | [Link](#get-user-session)
 GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | [Link](#get-user-attributes)
 POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link](#create-film-epk)
-PATCH(not complete)     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
+DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | [Link](#create-film-epk)
+PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
 PATCH      | `/api/v1/film_epk/:id` | Create film_epk awards. | [Link](#Create-film-epk-awards)
 PATCH      | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
 PATCH      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
@@ -248,22 +249,21 @@ Example 1:
 }
 
 ```
-
 ---
 
-# Update Film Epk
+# Delete Film Epk
 
-Update film epk.
+Delete a film epk and it's dependents.
 
 ```
-PATCH /api/v1/film_epk/:id
+DELETE /api/v1/film_epk/:id
 ```
 
-## Parameters
+## :id
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
+`id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
 -
@@ -271,10 +271,40 @@ Notes:
 ## Example Request
 
 ```
+DELETE https://epk-be.herokuapp.com/api/v1/film_epk/:id
+```
+
+## Example Response
+
+```
+Status: 204 No Content
+```
+
+---
+
+# Update Film Epk
+
+Update film epk attributes.
+
+```
+PATCH /api/v1/film_epk/:id
+```
+
+## :id
+
+Name        | Data Type | In    | Required/Optional    | Description
+------------|---------|-------|----------------------|------------
+`id`   | Integer | Path | Required | The ID of the film epk
+
+Notes:
+- Add any or all of the film epk attributes in the body to update.
+
+## Example Request
+
+```
 PATCH https://epk-be.herokuapp.com/api/v1/film_epk/<<film_epk_id>>
 
 body = {
-      "user_id": "1",
       "movie_title": "Captain Crunch",
       "genre": "Rom-Com",
      }
@@ -321,15 +351,13 @@ Create film epk awards.
 PATCH /api/v1/film_epk/:id
 ```
 
-## Parameters
+## :id
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
+`id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
-- First patch will create an awards table attached to the film epk
-- Will not have an awards ID
 - take note that the body is JSON( wrap keys and values in double quotes)
 
 ## Example Request
@@ -397,15 +425,13 @@ Update film epk awards.
 PATCH /api/v1/film_epk/:id
 ```
 
-## Parameters
+## :id
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
+`id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
-- After first patch, all calls will update or add awards.
-- If updating an existing award, the award ID will be needed in body.
 - take note that the body is JSON( wrap keys and values in double quotes)
 
 ## Example Request
@@ -474,15 +500,13 @@ Create film epk film fam.
 PATCH /api/v1/film_epk/:id
 ```
 
-## Parameters
+## :id
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
+`id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
-- First patch will create an film fams table attached to the film epk
-- Will not have an film fam ID
 - take note that the body is JSON( wrap keys and values in double quotes)
 
 ## Example Request
@@ -558,15 +582,13 @@ Update film epk film fam.
 PATCH /api/v1/film_epk/:id
 ```
 
-## Parameters
+## :id
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
+`id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
-- After first patch, all calls will update or add awards.
-- If updating an existing film_fam, the film_fam ID will be needed in body.
 - take note that the body is JSON( wrap keys and values in double quotes)
 
 ## Example Request
@@ -644,15 +666,13 @@ Create film epk Preses.
 PATCH /api/v1/film_epk/:id
 ```
 
-## Parameters
+## :id
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
+`:id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
-- First patch will create an presses table attached to the film epk
-- Will not have an film fam ID
 - take note that the body is JSON( wrap keys and values in double quotes)
 
 ## Example Request
@@ -899,4 +919,3 @@ body = {
 }
 ```
 ---
-
