@@ -190,7 +190,7 @@ RSpec.describe 'movie details API' do
   end
 
   describe "create award" do
-    it "creates an associated award record" do
+    xit "creates an associated award record" do
       body = {
         film_epk: {
           award: {
