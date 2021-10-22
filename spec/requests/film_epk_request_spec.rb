@@ -16,27 +16,10 @@ RSpec.describe 'movie details API' do
      )
   end
 
-  it 'returns the user credentials after a succesfull login', :vcr do
-   user =  User.create!(
-      email: "whatever@example.com",
-      first_name: "First",
-      last_name: "Last",
-      password: "password",
-      password_confirmation: "password"
-    )
-
+  it 'creates a film epk' do
     body = {
       title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
-      user_id: user.id,
-      genre: "horror",
-      country: "vietnam",
-      release_year: "2013",
-      run_time: "223",
-      language: "Vietnamese",
-      budget: "1000000",
-      website: "http://www.example.com",
-      production_company: "Universal Studios",
-      distribution: "distribution"
+      user_id: @user.id,
      }
 
     post '/api/v1/film_epk', params: body, as: :json
@@ -57,7 +40,60 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:attributes]).to be_a(Hash)
     expect(movie_detail[:data][:attributes].keys.count).to eq(14)
     expect(movie_detail[:data][:attributes]).to have_key(:user_id)
-    expect(movie_detail[:data][:attributes][:user_id]).to eq(user.id)
+    expect(movie_detail[:data][:attributes][:user_id]).to eq(@user.id)
+    expect(movie_detail[:data][:attributes]).to have_key(:genre)
+    expect(movie_detail[:data][:attributes][:genre]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:country)
+    expect(movie_detail[:data][:attributes][:country]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:release_year)
+    expect(movie_detail[:data][:attributes][:release_year]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:run_time)
+    expect(movie_detail[:data][:attributes][:run_time]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:language)
+    expect(movie_detail[:data][:attributes][:language]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:budget)
+    expect(movie_detail[:data][:attributes][:budget]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:website)
+    expect(movie_detail[:data][:attributes][:website]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:production_company)
+    expect(movie_detail[:data][:attributes][:production_company]).to eq(nil)
+    expect(movie_detail[:data][:attributes]).to have_key(:distribution)
+    expect(movie_detail[:data][:attributes][:distribution]).to eq(nil)
+  end
+
+  it 'updates an existing film epk records attributes' do
+    body = {
+      movie_title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
+      genre: "horror",
+      country: "vietnam",
+      release_year: "2013",
+      run_time: "223",
+      language: "Vietnamese",
+      budget: "1000000",
+      website: "http://www.example.com",
+      production_company: "Universal Studios",
+      distribution: "distribution"
+     }
+
+    patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    movie_detail = JSON.parse(response.body, symbolize_names: true)
+
+    expect(movie_detail).to have_key(:data)
+    expect(movie_detail[:data]).to be_a(Hash)
+    expect(movie_detail[:data].keys.count).to eq(3)
+    expect(movie_detail[:data]).to have_key(:id)
+    expect(movie_detail[:data][:id]).to be_a(String)
+    expect(movie_detail[:data]).to have_key(:type)
+    expect(movie_detail[:data][:type]).to eq("film_epk")
+    expect(movie_detail[:data]).to have_key(:attributes)
+    expect(movie_detail[:data][:attributes]).to be_a(Hash)
+    expect(movie_detail[:data][:attributes].keys.count).to eq(14)
+    expect(movie_detail[:data][:attributes]).to have_key(:user_id)
+    expect(movie_detail[:data][:attributes][:user_id]).to eq(@user.id)
     expect(movie_detail[:data][:attributes]).to have_key(:genre)
     expect(movie_detail[:data][:attributes][:genre]).to be_a(String)
     expect(movie_detail[:data][:attributes]).to have_key(:country)
@@ -76,6 +112,21 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:attributes][:production_company]).to be_a(String)
     expect(movie_detail[:data][:attributes]).to have_key(:distribution)
     expect(movie_detail[:data][:attributes][:distribution]).to be_a(String)
+  end
+
+  it "deletes a film epk record and it's dependents" do
+    # award = Award.create!(film_epk_id: @epk.id)
+    press = Press.create!(film_epk_id: @epk.id)
+    film_fam = FilmFam.create!(film_epk_id: @epk.id)
+
+    delete "/api/v1/film_epk/#{@epk.id}"
+
+    expect(response).to be_successful
+    expect(response.status).to eq(204)
+    expect(FilmEpk.all).to eq([])
+    expect(Award.all).to eq([])
+    expect(Press.all).to eq([])
+    expect(FilmFam.all).to eq([])
   end
 
   describe "upload movie poster" do
