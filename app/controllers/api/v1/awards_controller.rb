@@ -8,14 +8,23 @@ class Api::V1::AwardsController < ApplicationController
   end
 
   def create
-    award = @film_epk.awards.new(@award_params)
+    award = Award.new(award_params)
     if award.save
-     return FilmEpkSerializer.new(@film_epk)
+      render json: AwardSerializer.new(award)
+    else
+      render json: { error: "An existing Film Epk id is required" }
     end
-    { error: "Problems" }
   end
 
   def update
     award = Award.find_by(id: award_params[:id])
+  end
+
+  private
+
+  def award_params
+    params.
+    require(:award).
+    permit(:name, :year, :award_type, :film_epk_id)
   end
 end

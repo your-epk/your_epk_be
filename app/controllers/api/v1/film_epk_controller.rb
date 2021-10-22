@@ -24,7 +24,7 @@ class Api::V1::FilmEpkController < ApplicationController
       film_epk.movie_poster.attach(movie_poster)
       render json: film_epk.as_json(root: false, methods: :movie_poster_url).except('updated_at')
     end
-    render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
+    # render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
     render json: FilmFamsController.new.check(film_epk_params[:film_fam], film_epk) if film_epk_params[:film_fam]
     render json: PressesController.new.check(film_epk_params[:presses], film_epk) if film_epk_params[:presses]
   end
