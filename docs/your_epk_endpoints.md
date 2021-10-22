@@ -5,10 +5,10 @@ HTTP Verb | Endpoint              | Description                              | L
 POST       | `/api/v1/sessions` | Get a single user. | [Link](#get-user-session)
 GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | [Link](#get-user-attributes)
 POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link](#create-film-epk)
-DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | [Link](#create-film-epk)
+DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | [Link](#delete-film-epk)
 PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
-PATCH      | `/api/v1/film_epk/:id` | Create film_epk awards. | [Link](#Create-film-epk-awards)
-PATCH      | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
+POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-award)
+PATCH(not working)     | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
 PATCH      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
 PATCH      | `/api/v1/film_epk/:id` | Create film_epk presses. | [Link](#Update-film-epk-presses)
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
@@ -343,37 +343,30 @@ Example 1:
 
 ---
 
-# Create Film Epk Awards
+# Create Film Epk Award
 
-Create film epk awards.
+Create film epk award.
 
 ```
-PATCH /api/v1/film_epk/:id
+POST /api/v1/awards
 ```
-
-## :id
-
-Name        | Data Type | In    | Required/Optional    | Description
-------------|---------|-------|----------------------|------------
-`id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
-- take note that the body is JSON( wrap keys and values in double quotes)
+- Must have a film_epk_id in the body
 
 ## Example Request
 
 ```
-PATCH https://epk-be.herokuapp.com/api/v1/film_epk/#{epk.id}
+POST https://epk-be.herokuapp.com/api/v1/awards
 
- body = {
-        "film_epk": {
+body = {
           "award": {
             "name": "The Super Award",
             "year": "1999",
-            "award_type": "Shiny"
+            "award_type": "Shiny",
+            "film_epk_id": "80"
           }
-        }
-      }
+       }
 ```
 
 ## Example Response
@@ -387,29 +380,13 @@ Example 1:
 
 {
     "data": {
-        "id": "2",
-        "type": "film_epk",
+        "id": "3",
+        "type": "award",
         "attributes": {
-            "user_id": 1,
-            "movie_title": null,
-            "genre": null,
-            "country": null,
-            "release_year": null,
-            "run_time": null,
-            "language": null,
-            "budget": null,
-            "website": null,
-            "production_company": null,
-            "distribution": null,
-            "awards": [
-                {
-                    "id": 27,
-                    "name": "The Super Award",
-                    "year": "1999",
-                    "award_type": "Shiny",
-                    "film_epk_id": 2
-                }
-            ]
+            "name": "The Super Award",
+            "year": "1999",
+            "award_type": "Shiny",
+            "film_epk_id": 80
         }
     }
 }
