@@ -8,8 +8,11 @@ class Api::V1::AwardsController < ApplicationController
   end
 
   def create
-    @film_epk.awards.create(@award_params)
-    FilmEpkSerializer.new(@film_epk)
+    award = @film_epk.awards.new(@award_params)
+    if award.save
+     return FilmEpkSerializer.new(@film_epk)
+    end
+    { error: "Problems" }
   end
 
   def update
