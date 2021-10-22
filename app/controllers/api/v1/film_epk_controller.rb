@@ -29,6 +29,11 @@ class Api::V1::FilmEpkController < ApplicationController
     render json: PressesController.new.check(film_epk_params[:presses], film_epk) if film_epk_params[:presses]
   end
 
+  def destroy
+    film_epk = FilmEpk.find(params[:id].to_i)
+    film_epk.destroy
+  end
+
   private
 
   def film_epk_params
