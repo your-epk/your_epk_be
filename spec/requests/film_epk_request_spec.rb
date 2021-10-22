@@ -114,6 +114,21 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:attributes][:distribution]).to be_a(String)
   end
 
+  it "deletes a film epk record and it's dependents" do
+    # award = Award.create!(film_epk_id: @epk.id)
+    press = Press.create!(film_epk_id: @epk.id)
+    film_fam = FilmFam.create!(film_epk_id: @epk.id)
+
+    delete "/api/v1/film_epk/#{@epk.id}"
+
+    expect(response).to be_successful
+    expect(response.status).to eq(204)
+    expect(FilmEpk.all).to eq([])
+    expect(Award.all).to eq([])
+    expect(Press.all).to eq([])
+    expect(FilmFam.all).to eq([])
+  end
+
   describe "upload movie poster" do
     xit "updates the film_epk record with a movie_poster_url", :vcr do
       user =  User.create!(
