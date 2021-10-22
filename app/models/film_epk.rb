@@ -1,8 +1,8 @@
 class FilmEpk < ApplicationRecord
   belongs_to :user
-  has_many :awards
-  has_many :film_fams
-  has_many :presses
+  has_many :awards, dependent: :destroy
+  has_many :film_fams, dependent: :destroy
+  has_many :presses, dependent: :destroy
   has_one_attached :movie_poster
 
   def movie_poster_url
