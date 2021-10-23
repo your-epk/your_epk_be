@@ -6,7 +6,7 @@ class Api::V1::FilmEpkController < ApplicationController
     epk = FilmEpk.new(film_epk_params)
 
     if epk.save
-      render json: FilmEpkSerializer.new(epk), status: :ok
+      render json: FilmEpkSerializer.new(epk, include: [:awards]), status: :ok
     else
       render json: {error: "Please Fill In required Fields"}, status: :not_found
     end
@@ -16,7 +16,7 @@ class Api::V1::FilmEpkController < ApplicationController
     film_epk = FilmEpk.find_by(id: params[:id].to_i)
     unless film_epk_params[:award] || film_epk_params[:film_fam] || film_epk_params[:presses]
       film_epk.update(film_epk_params)
-      render json: FilmEpkSerializer.new(film_epk)
+      render json: FilmEpkSerializer.new(film_epk, include: [:awards])
     end
 
     movie_poster = film_epk_params[:movie_poster]
@@ -34,6 +34,11 @@ class Api::V1::FilmEpkController < ApplicationController
     film_epk.destroy
   end
 
+  def show
+    film_epk = FilmEpk.find(params[:id].to_i)
+    render json: FilmEpkSerializer.new(film_epk, include: [:awards])
+  end
+
   private
 
   def film_epk_params
@@ -47,7 +52,6 @@ class Api::V1::FilmEpkController < ApplicationController
              :tag_line,
              :log_line,
              :synopsis,
-             :movie_poster,
              :genre,
              :country,
              :release_year,
@@ -61,8 +65,7 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_email,
              :contact_number,
              :company_name,
-             :header_image,
-             award: [:name, :year, :award_type],
+             # award: [:name, :year, :award_type],
              film_fam: [:role, :first_name, :last_name, :description],
              presses: [:name_of_publication, :description, :link]
            )

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create, :index]
-      resources :film_epk, only: [:create, :index, :update, :destroy]
+      resources :film_epk, only: [:create, :index, :update, :destroy, :show]
       resources :users, only: [:show]
       resources :awards, only: [:create]
       post '/presigned_url', to: 'direct_upload#create'
