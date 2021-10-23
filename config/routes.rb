@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :index]
       resources :film_epk, only: [:create, :index, :update, :destroy, :show]
       resources :users, only: [:show]
-      resources :awards, only: [:create]
+      resources :awards, only: [:create, :destroy]
       post '/presigned_url', to: 'direct_upload#create'
     end
   end
