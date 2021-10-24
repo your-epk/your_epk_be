@@ -1,11 +1,11 @@
 class Api::V1::AwardsController < ApplicationController
 
-  def check(award_params, film_epk)
-    @award_params = award_params
-    @film_epk = film_epk
-    return create if award_params[:id].nil?
-    return update if !award_params[:id].nil?
-  end
+  # def check(award_params, film_epk)
+  #   @award_params = award_params
+  #   @film_epk = film_epk
+  #   return create if award_params[:id].nil?
+  #   return update if !award_params[:id].nil?
+  # end
 
   def create
     award = Award.new(award_params)
@@ -18,6 +18,12 @@ class Api::V1::AwardsController < ApplicationController
 
   def update
     award = Award.find_by(id: award_params[:id])
+  end
+
+  def destroy
+    award = Award.find_by(id: params[:id])
+    return render json: { error: "Award does not exist" }, status: :not_found if award.nil?
+    award.destroy
   end
 
   private
