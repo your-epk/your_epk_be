@@ -14,16 +14,8 @@ class Api::V1::FilmEpkController < ApplicationController
 
   def update
     film_epk = FilmEpk.find_by(id: params[:id].to_i)
-    unless film_epk_params[:award] || film_epk_params[:film_fam] || film_epk_params[:presses]
-      film_epk.update(film_epk_params)
-      render json: FilmEpkSerializer.new(film_epk, include: [:awards])
-    end
-
-    movie_poster = film_epk_params[:movie_poster]
-    if !movie_poster.nil?
-      film_epk.movie_poster.attach(movie_poster)
-      render json: film_epk.as_json(root: false, methods: :movie_poster_url).except('updated_at')
-    end
+    film_epk.update(film_epk_params)
+    render json: FilmEpkSerializer.new(film_epk, include: [:awards])
     # render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
     render json: FilmFamsController.new.check(film_epk_params[:film_fam], film_epk) if film_epk_params[:film_fam]
     render json: PressesController.new.check(film_epk_params[:presses], film_epk) if film_epk_params[:presses]
@@ -65,6 +57,7 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_email,
              :contact_number,
              :company_name,
+             :movie_poster,
              # award: [:name, :year, :award_type],
              film_fam: [:role, :first_name, :last_name, :description],
              presses: [:name_of_publication, :description, :link]
