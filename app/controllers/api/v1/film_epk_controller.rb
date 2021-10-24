@@ -58,6 +58,7 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_number,
              :company_name,
              :movie_poster,
+             :header_image_description,
              film_fam: [:role, :first_name, :last_name, :description]
            )
   end
