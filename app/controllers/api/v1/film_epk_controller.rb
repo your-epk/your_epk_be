@@ -18,7 +18,7 @@ class Api::V1::FilmEpkController < ApplicationController
     render json: FilmEpkSerializer.new(film_epk, include: [:awards])
     # render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
     render json: FilmFamsController.new.check(film_epk_params[:film_fam], film_epk) if film_epk_params[:film_fam]
-    render json: PressesController.new.check(film_epk_params[:presses], film_epk) if film_epk_params[:presses]
+    # render json: PressesController.new.check(film_epk_params[:presses], film_epk) if film_epk_params[:presses]
   end
 
   def destroy
@@ -58,9 +58,7 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_number,
              :company_name,
              :movie_poster,
-             # award: [:name, :year, :award_type],
-             film_fam: [:role, :first_name, :last_name, :description],
-             presses: [:name_of_publication, :description, :link]
+             film_fam: [:role, :first_name, :last_name, :description]
            )
   end
 end
