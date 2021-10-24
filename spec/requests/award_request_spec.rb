@@ -14,6 +14,13 @@ RSpec.describe 'awards API' do
       user_id: @user.id,
       movie_title: "The Best"
     )
+
+    @award = Award.create!(
+      name: "The Original",
+      year: "2002",
+      award_type: "Shiny",
+      film_epk_id: @epk.id
+    )
   end
 
   it 'creates a flim epk award' do
@@ -50,5 +57,27 @@ RSpec.describe 'awards API' do
     expect(award_info[:data][:attributes][:award_type]).to be_a(String)
     expect(award_info[:data][:attributes]).to have_key(:film_epk_id)
     expect(award_info[:data][:attributes][:film_epk_id]).to eq(@epk.id)
+  end
+
+  describe "delete" do
+    it "deletes an award record by id" do
+      delete "/api/v1/awards/#{@award.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+      expect(Award.all).to eq([])
+    end
+
+    it "returns an error if a delete is attempted for an award that doesn't exist" do
+      delete "/api/v1/awards/27"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      error_message = { error: "Award does not exist" }
+
+      expect(response_body).to eq(error_message)
+    end
   end
 end
