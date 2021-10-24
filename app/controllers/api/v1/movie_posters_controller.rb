@@ -1,6 +1,6 @@
 class Api::V1::MoviePostersController < ApplicationController
   def create
-    movie_poster = poster_params[:movie_poster]
+    movie_poster = poster_params[:blob_signed_id]
     film_epk = FilmEpk.find_by(id: poster_params[:film_epk_id].to_i)
     if !film_epk.nil?
       film_epk.movie_poster.attach(movie_poster)
@@ -13,6 +13,6 @@ class Api::V1::MoviePostersController < ApplicationController
 
   private
   def poster_params
-    params.permit(:movie_poster, :film_epk_id)
+    params.permit(:blob_signed_id, :film_epk_id)
   end
 end
