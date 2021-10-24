@@ -5,12 +5,14 @@ HTTP Verb | Endpoint              | Description                              | L
 POST       | `/api/v1/sessions` | Get a single user. | [Link](#get-user-session)
 GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | [Link](#get-user-attributes)
 POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link](#create-film-epk)
+GET       | `/api/v1/film_epk/:id` | Get a film epk's attributes and relationships. | [Link](#get-film-epk)
 DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | [Link](#delete-film-epk)
 PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
 POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-award)
+DELETE      | `/api/v1/awards/:id` | Delete an award. | [Link](#delete-film-epk-award)
 PATCH(not working)     | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
-PATCH      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
-PATCH      | `/api/v1/film_epk/:id` | Create film_epk presses. | [Link](#Update-film-epk-presses)
+PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
+PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk presses. | [Link](#Update-film-epk-presses)
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
 PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Storage. | [Link](#asset-aws-s3-upload)
 PATCH      | `api/v1/film_epk/:id` | Update film_epk movie poster. | [Link](#update-film-epk-movie-poster)
@@ -251,6 +253,100 @@ Example 1:
 ```
 ---
 
+# Get Film Epk
+
+Get a film epk's attributes and relationships.
+
+```
+GET /api/v1/film_epk/:id
+```
+
+Notes:
+- "user_id" must be included in the request body
+
+## Example Request
+
+```
+POST https://epk-be.herokuapp.com/api/v1/film_epk
+
+body = {
+      "user_id": "1",
+      "movie_title": "Jimmies Cookies",
+      "genre": "horror",
+      "country": "vietnam",
+      "release_year": "2013",
+      "run_time": "223",
+      "language": "Vietnamese",
+      "budget": "1000000",
+      "website": "http://www.example.com",
+      "production_company": "Universal Studios",
+      "distribution": "distribution"
+     }
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": {
+        "id": "133",
+        "type": "film_epk",
+        "attributes": {
+            "user_id": 1,
+            "movie_title": "Jimmies Cookies",
+            "genre": "horror",
+            "trailer": null,
+            "teaser": null,
+            "tag_line": null,
+            "log_line": null,
+            "synopsis": null,
+            "country": "vietnam",
+            "release_year": "2013",
+            "run_time": 223,
+            "language": "Vietnamese",
+            "budget": 1000000,
+            "website": "http://www.example.com",
+            "production_company": "Universal Studios",
+            "distribution": "distribution",
+            "contact_name": null,
+            "contact_email": null,
+            "contact_number": null,
+            "company_name": null
+        },
+        "relationships": {
+            "awards": {
+                "data": [
+                    {
+                        "id": "20",
+                        "type": "award"
+                    },
+                ]
+            }
+        }
+    },
+    "included": [
+        {
+            "id": "20",
+            "type": "award",
+            "attributes": {
+                "name": "gfsfdg",
+                "year": "dfgdf",
+                "award_type": "sfdgsdg",
+                "film_epk_id": 133
+            }
+        },
+    ]
+}
+
+```
+---
+
 # Delete Film Epk
 
 Delete a film epk and it's dependents.
@@ -391,6 +487,30 @@ Example 1:
     }
 }
 
+```
+---
+
+# Delete Award
+
+Delete an award.
+
+```
+DELETE /api/v1/awards/:id
+```
+
+Notes:
+-
+
+## Example Request
+
+```
+DELETE https://epk-be.herokuapp.com/api/v1/awards/<id>
+```
+
+## Example Response
+
+```
+Status: 204 No Content
 ```
 ---
 
