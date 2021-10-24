@@ -15,7 +15,7 @@ PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [
 PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk presses. | [Link](#Update-film-epk-presses)
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
 PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Storage. | [Link](#asset-aws-s3-upload)
-PATCH      | `api/v1/film_epk/:id` | Update film_epk movie poster. | [Link](#update-film-epk-movie-poster)
+POST     | `api/v1/movie_posters` | Update a film_epk with a movie poster url. | [Link](#Post-a-movie-poster)
 
 ---
 
@@ -946,33 +946,28 @@ no response sent back
 ```
 ---
 
-# Update Film Epk Movie Poster
+# Post a movie poster
 
-Update film epk movie poster
+Update film epk with an AWS S3 movie poster url
 
 ```
-PATCH /api/v1/film_epk/<<film_epk_id>>
+Post /api/v1/movie_posters
 ```
-## Parameters
-
-Name        | Data Type | In    | Required/Optional    | Description
-------------|---------|-------|----------------------|------------
-`film_epk_id`   | Integer | Path | Required | The ID of the film epk
-
 
 Notes:
-- Value of movie_poster is the blob_signed_id
+- Must provided a film_epk_id in the body
+- blob_signed_id is provided in the presigned_url post response body
 - Note that the response `movie_url` may comeback much longer than depicted
 
 
 ## Example Request
 
 ```
-PATCH /api/v1/film_epk/22
+POsT /api/v1/movie_posters
 
 body = {
-    "film_epk": {
-    "movie_poster": "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d57ff741221f13e76f879478263c22a0918d812f"
+    "film_epk_id": "1"
+    "blob_signed_id": "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d57ff741221f13e76f879478263c22a0918d812f"
     }
 }
 
@@ -985,34 +980,8 @@ Status: 200 OK
 ```
 
 ```
-body = {
-    "data": {
-        "id": "2",
-        "type": "film_epk",
-        "attributes": {
-            "user_id": 1,
-            "movie_title": null,
-            "genre": null,
-            "country": null,
-            "release_year": null,
-            "run_time": null,
-            "language": null,
-            "budget": null,
-            "website": null,
-            "production_company": null,
-            "distribution": null,
-            "awards": [
-                {
-                    "id": 27,
-                    "name": "The Super Award",
-                    "year": "1999",
-                    "award_type": "Shiny",
-                    "film_epk_id": 2
-                }
-            ],
-            "movie_poster_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/9cec0105-35f8-4277-ba98-16c53d466c91?response-content"
-        }
-    }
+{
+    "movie_poster_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/ae330064-d3dd-43c2-8578-a6e740925dd6?response-content-disposition=inline%3B%20filename%3D%22test_upload%22%3B%20filename%2A%3DUTF-8%27%27test_upload&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVGNANJEWSXY6YYDD%2F20211024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211024T195711Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b34be329264520e9eaae673b2ba8126c7dd8db7dc45fd608a867d18bcea3cf46"
 }
 ```
 ---
