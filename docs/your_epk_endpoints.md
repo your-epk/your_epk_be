@@ -12,7 +12,7 @@ POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-
 DELETE      | `/api/v1/awards/:id` | Delete an award. | [Link](#delete-film-epk-award)
 PATCH(not working)     | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
 PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
-PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk presses. | [Link](#Update-film-epk-presses)
+POST      | `/api/v1/presses` | Create film_epk presses. | [Link](#Update-film-epk-presses)
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
 PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Storage. | [Link](#asset-aws-s3-upload)
 POST     | `api/v1/movie_posters` | Update a film_epk with a movie poster url. | [Link](#Post-a-movie-poster)
@@ -757,17 +757,11 @@ Example 1:
 
 # Create Film Epk Presses
 
-Create film epk Preses.
+Create film epk Presses.
 
 ```
-PATCH /api/v1/film_epk/:id
+POST /api/v1/presses
 ```
-
-## :id
-
-Name        | Data Type | In    | Required/Optional    | Description
-------------|---------|-------|----------------------|------------
-`:id`   | Integer | Path | Required | The ID of the film epk
 
 Notes:
 - take note that the body is JSON( wrap keys and values in double quotes)
@@ -775,17 +769,16 @@ Notes:
 ## Example Request
 
 ```
-PATCH https://epk-be.herokuapp.com/api/v1/film_epk/#{epk.id}
+POST https://epk-be.herokuapp.com/api/v1/presses
 
  body = {
-        "film_epk": {
-          "presses": {
+          "press": {
             "name_of_publication": "ExamplePub",
             "description": "ExampleDesc",
-            "link": "ex.com"
+            "link": "ex.com",
+            "film_epk_id": "1"
           }
         }
-      }
 ```
 
 ## Example Response
@@ -799,47 +792,13 @@ Example 1:
 
 {
     "data": {
-        "id": "2",
-        "type": "film_epk",
+        "id": "1",
+        "type": "presses",
         "attributes": {
-            "user_id": 1,
-            "movie_title": null,
-            "genre": null,
-            "country": null,
-            "release_year": null,
-            "run_time": null,
-            "language": null,
-            "budget": null,
-            "website": null,
-            "production_company": null,
-            "distribution": null,
-            "awards": [
-                {
-                    "id": 27,
-                    "name": "The Super Award",
-                    "year": "1999",
-                    "award_type": "Shiny",
-                    "film_epk_id": 2
-                }
-            ]
-            film_fam: [
-                {
-                    "id": 1
-                    "role": "Director",
-                    "first_name": "Harry",
-                    "last_name": "Parabols",
-                    "description": "Runs this shit",
-                }
-            ]
-            "presses": [
-                {
-                    "id": 1,
-                    "name_of_publication": "ExamplePub",
-                    "description": "ExampleDesc",
-                    "link": "ex.com",
-                    "film_epk_id": 1
-                }
-            ]
+          "name_of_publication": "ExamplePub",
+          "description": "ExampleDesc",
+          "link": "ex.com",
+          "film_epk_id": "1"
         }
     }
 }
