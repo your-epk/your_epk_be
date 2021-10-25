@@ -5,4 +5,8 @@ class FilmFamSerializer
              :last_name,
              :description,
              :film_epk_id
+
+  attribute :head_shot_url do |object|
+    object.head_shot_url
+  end
 end

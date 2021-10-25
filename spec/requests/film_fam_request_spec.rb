@@ -51,7 +51,7 @@ RSpec.describe 'film fam API' do
     expect(film_fam[:data][:type]).to eq("film_fam")
     expect(film_fam[:data]).to have_key(:attributes)
     expect(film_fam[:data][:attributes]).to be_a(Hash)
-    expect(film_fam[:data][:attributes].keys.count).to eq(5)
+    expect(film_fam[:data][:attributes].keys.count).to eq(6)
     expect(film_fam[:data][:attributes]).to have_key(:role)
     expect(film_fam[:data][:attributes][:role]).to be_a(String)
     expect(film_fam[:data][:attributes]).to have_key(:first_name)

@@ -1,8 +1,8 @@
 class FilmEpkSerializer
   include FastJsonapi::ObjectSerializer
   has_many :awards
-  # has_many :presses
-  # has_many :film_fams
+  has_many :presses
+  has_many :film_fams
   set_type :film_epk
   attributes :user_id,
              :movie_title,
@@ -26,11 +26,11 @@ class FilmEpkSerializer
              :company_name,
              :header_image_description
 
-   attribute :movie_poster_url do |object|
-     object.movie_poster_url
-   end
+  attribute :movie_poster_url do |object|
+    object.movie_poster_url
+  end
 
-   attribute :header_image_url do |object|
+  attribute :header_image_url do |object|
     object.header_image_url
   end
 end

@@ -25,7 +25,7 @@ class Api::V1::FilmEpkController < ApplicationController
 
   def show
     film_epk = FilmEpk.find(params[:id].to_i)
-    render json: FilmEpkSerializer.new(film_epk, include: [:awards])
+    render json: FilmEpkSerializer.new(film_epk, include: [:awards, :film_fams, :presses])
   end
 
   private
@@ -54,8 +54,7 @@ class Api::V1::FilmEpkController < ApplicationController
              :contact_email,
              :contact_number,
              :company_name,
-             :header_image_description,
-             film_fam: [:role, :first_name, :last_name, :description]
-           )
+             :header_image_description
+      )
   end
 end

@@ -28,5 +28,4 @@ class Api::V1::FilmFamsController < ApplicationController
     require(:film_fam).
     permit(:role, :first_name, :last_name, :description, :film_epk_id)
   end
-
 end 
