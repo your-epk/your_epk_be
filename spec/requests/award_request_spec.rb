@@ -59,6 +59,25 @@ RSpec.describe 'awards API' do
     expect(award_info[:data][:attributes][:film_epk_id]).to eq(@epk.id)
   end
 
+  it "will not create an Award if the Film Epk does not exist" do
+    body = {
+        award: {
+          name: "The Super Award",
+          year: "1999",
+          award_type: "Shiny",
+          film_epk_id: 10_000_000
+        }
+    }
+
+    post "/api/v1/awards", params: body, as: :json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response_body).to eq(error_message = { error: "An existing Film Epk id is required" })
+  end
+
   describe "delete" do
     it "deletes an award record by id" do
       delete "/api/v1/awards/#{@award.id}"

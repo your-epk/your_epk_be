@@ -61,7 +61,7 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:attributes][:distribution]).to eq(nil)
   end
 
-  it 'returns an error if fields not filled out correctly' do 
+  it 'returns an error if fields not filled out correctly' do
     body = {
       title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
       user_id: nil,
@@ -75,7 +75,7 @@ RSpec.describe 'movie details API' do
     response_body = JSON.parse(response.body, symbolize_names: true)
     error_message = { error: "Please Fill In required Fields" }
     expect(response_body).to eq(error_message)
-  end 
+  end
 
   it 'updates an existing film epk records attributes' do
     body = {
@@ -183,65 +183,5 @@ RSpec.describe 'movie details API' do
     expect(Award.all).to eq([])
     expect(Press.all).to eq([])
     expect(FilmFam.all).to eq([])
-  end
-
-  describe "upload movie poster" do
-    xit "updates the film_epk record with a movie_poster_url", :vcr do
-      user =  User.create!(
-         email: "whatever@example.com",
-         first_name: "First",
-         last_name: "Last",
-         password: "password",
-         password_confirmation: "password"
-       )
-
-      epk = FilmEpk.create!(
-        user_id: user.id,
-        movie_title: "The Best"
-      )
-
-      body1 = {
-        file: {
-               filename: "test_upload",
-               byte_size: 92358,
-               checksum: "UCo4+JMJDVuxmSASPcz+Wg==",
-               content_type: "image/jpeg",
-               metadata: {
-               message: "active_storage_test"
-              }
-        }
-      }
-
-      post '/api/v1/presigned_url', params: body1, as: :json
-      response_body1 = JSON.parse(response.body, symbolize_names: true)
-
-      body2 = File.binread('spec/assets/amazing_grace_movie_poster.jpg')
-      headers2 = {
-        "Content-MD5": response_body1[:direct_upload][:headers][:"Content-MD5"],
-        "Content-Type": response_body1[:direct_upload][:headers][:"Content-Type"]
-      }
-# direct_upload url changes each time the post '/api/v1/presigned_url' is called - need to be static. stub?
-      Faraday.put(response_body1[:direct_upload][:url]) do |f|
-        f.body = body2
-        f.headers = headers2
-      end
-
-      body3 = {
-                movie_poster: "#{response_body1[:blob_signed_id]}"
-              }
-
-      patch "/api/v1/film_epk/#{epk.id}", params: body3, as: :json
-      response_body3 = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response).to be_successful
-      expect(response.status).to eq(200)
-
-      expect(response_body3).to have_key(:id)
-      expect(response_body3[:id]).to eq(epk.id)
-      expect(response_body3).to have_key(:user_id)
-      expect(response_body3[:user_id]).to eq(user.id)
-      expect(response_body3).to have_key(:movie_poster_url)
-      expect(response_body3[:movie_poster_url]).to be_a(String)
-    end
   end
 end
