@@ -442,7 +442,78 @@ Example 1:
 ```
 
 ---
+# Create Film Epk Award
 
+Create film epk award.
+
+```
+POST /api/v1/awards
+```
+
+Notes:
+- Must have a film_epk_id in the body
+
+## Example Request
+
+```
+POST https://epk-be.herokuapp.com/api/v1/awards
+
+body = {
+          "award": {
+            "name": "The Super Award",
+            "year": "1999",
+            "award_type": "Shiny",
+            "film_epk_id": "80"
+          }
+       }
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": {
+        "id": "3",
+        "type": "award",
+        "attributes": {
+            "name": "The Super Award",
+            "year": "1999",
+            "award_type": "Shiny",
+            "film_epk_id": 80
+        }
+    }
+}
+
+```
+---
+# Delete Award
+
+Delete an award.
+
+```
+DELETE /api/v1/awards/:id
+```
+
+Notes:
+-
+
+## Example Request
+
+```
+DELETE https://epk-be.herokuapp.com/api/v1/awards/<id>
+```
+
+## Example Response
+
+```
+Status: 204 No Content
+```
 # Create Film Epk Film Fam
 
 Create film epk film fam.
@@ -511,80 +582,6 @@ Notes:
 
 ```
 DELETE https://epk-be.herokuapp.com/api/v1/film_fams/<id>
-```
-
-## Example Response
-
-```
-Status: 204 No Content
-```
----
-# Create Film Epk Award
-
-Create film epk award.
-
-```
-POST /api/v1/awards
-```
-
-Notes:
-- Must have a film_epk_id in the body
-
-## Example Request
-
-```
-POST https://epk-be.herokuapp.com/api/v1/awards
-
-body = {
-          "award": {
-            "name": "The Super Award",
-            "year": "1999",
-            "award_type": "Shiny",
-            "film_epk_id": "80"
-          }
-       }
-```
-
-## Example Response
-
-```
-Status: 200 OK
-```
-
-```
-Example 1:
-
-{
-    "data": {
-        "id": "3",
-        "type": "award",
-        "attributes": {
-            "name": "The Super Award",
-            "year": "1999",
-            "award_type": "Shiny",
-            "film_epk_id": 80
-        }
-    }
-}
-
-```
----
-
-# Delete Award
-
-Delete an award.
-
-```
-DELETE /api/v1/awards/:id
-```
-
-Notes:
--
-
-## Example Request
-
-```
-DELETE https://epk-be.herokuapp.com/api/v1/awards/<id>
 ```
 
 ## Example Response
