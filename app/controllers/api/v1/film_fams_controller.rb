@@ -9,6 +9,12 @@ class Api::V1::FilmFamsController < ApplicationController
     end
   end
 
+  def destroy
+    ff = FilmFam.find_by(id: params[:id])
+    return render json: { error: "Film Fam does not exist" }, status: :not_found if ff.nil?
+    ff.destroy
+  end 
+
   # def update  
   #   fam = FilmFam.find_by(id: film_fam_params[:id])
   #   fam.update(@ff_params)
