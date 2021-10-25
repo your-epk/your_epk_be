@@ -23,7 +23,8 @@ class FilmEpkSerializer
              :contact_name,
              :contact_email,
              :contact_number,
-             :company_name
+             :company_name,
+             :header_image_description
 
    attribute :movie_poster_url do |object|
      object.movie_poster_url

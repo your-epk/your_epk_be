@@ -38,7 +38,7 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:type]).to eq("film_epk")
     expect(movie_detail[:data]).to have_key(:attributes)
     expect(movie_detail[:data][:attributes]).to be_a(Hash)
-    expect(movie_detail[:data][:attributes].keys.count).to eq(21)
+    expect(movie_detail[:data][:attributes].keys.count).to eq(22)
     expect(movie_detail[:data][:attributes]).to have_key(:user_id)
     expect(movie_detail[:data][:attributes][:user_id]).to eq(@user.id)
     expect(movie_detail[:data][:attributes]).to have_key(:genre)
@@ -91,7 +91,7 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:type]).to eq("film_epk")
     expect(movie_detail[:data]).to have_key(:attributes)
     expect(movie_detail[:data][:attributes]).to be_a(Hash)
-    expect(movie_detail[:data][:attributes].keys.count).to eq(21)
+    expect(movie_detail[:data][:attributes].keys.count).to eq(22)
     expect(movie_detail[:data][:attributes]).to have_key(:user_id)
     expect(movie_detail[:data][:attributes][:user_id]).to eq(@user.id)
     expect(movie_detail[:data][:attributes]).to have_key(:genre)
@@ -131,7 +131,7 @@ RSpec.describe 'movie details API' do
     expect(film_epk[:data][:type]).to eq("film_epk")
     expect(film_epk[:data]).to have_key(:attributes)
     expect(film_epk[:data][:attributes]).to be_a(Hash)
-    expect(film_epk[:data][:attributes].keys.count).to eq(21)
+    expect(film_epk[:data][:attributes].keys.count).to eq(22)
     expect(film_epk[:data][:attributes]).to have_key(:user_id)
     expect(film_epk[:data][:attributes][:user_id]).to eq(@user.id)
     expect(film_epk[:data][:attributes]).to have_key(:genre)
@@ -229,44 +229,6 @@ RSpec.describe 'movie details API' do
     end
   end
 
-  describe "create award" do
-    xit "creates an associated award record" do
-      body = {
-        film_epk: {
-          award: {
-            name: "The Super Award",
-            year: "1999",
-            award_type: "Shiny"
-          }
-        }
-      }
-
-      patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
-
-      expect(response).to be_successful
-      expect(response.status).to eq(200)
-      response_body = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response_body).to have_key(:data)
-      expect(response_body[:data]).to be_a(Hash)
-      expect(response_body[:data].keys.count).to eq(3)
-      expect(response_body[:data]).to have_key(:id)
-      expect(response_body[:data][:id]).to eq(@epk.id.to_s)
-      expect(response_body[:data]).to have_key(:type)
-      expect(response_body[:data][:type]).to eq("film_epk")
-      expect(response_body[:data]).to have_key(:attributes)
-      expect(response_body[:data][:attributes]).to be_a(Hash)
-      expect(response_body[:data][:attributes].keys.count).to eq(14)
-      expect(response_body[:data][:attributes]).to have_key(:awards)
-      expect(response_body[:data][:attributes][:awards]).to be_an(Array)
-
-      awards = response_body[:data][:attributes][:awards]
-      expect(awards.first[:name]).to eq(body[:film_epk][:award][:name])
-      expect(awards.first[:year]).to eq(body[:film_epk][:award][:year])
-      expect(awards.first[:award_type]).to eq(body[:film_epk][:award][:award_type])
-    end
-  end
-
   describe "create film_fam" do
     xit "creates an associated film fam record" do
       body = {
@@ -304,46 +266,6 @@ RSpec.describe 'movie details API' do
       expect(ff.first[:role]).to eq(body[:film_epk][:film_fam][:role])
       expect(ff.first[:first_name]).to eq(body[:film_epk][:film_fam][:first_name])
       expect(ff.first[:last_name]).to eq(body[:film_epk][:film_fam][:last_name])
-    end
-  end
-
-  describe "create presses" do
-    xit "creates an associated press record" do
-      body = {
-        film_epk: {
-          presses: {
-            name_of_publication: "ExamplePub",
-            description: "ExampleDesc",
-            link: "exeample.com"
-          }
-        }
-      }
-
-      patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
-
-      expect(response).to be_successful
-      expect(response.status).to eq(200)
-
-      response_body = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response_body).to have_key(:data)
-      expect(response_body[:data]).to be_a(Hash)
-      expect(response_body[:data].keys.count).to eq(4)
-      expect(response_body[:data]).to have_key(:id)
-      expect(response_body[:data][:id]).to eq(@epk.id.to_s)
-      expect(response_body[:data]).to have_key(:type)
-      expect(response_body[:data][:type]).to eq("film_epk")
-      expect(response_body[:data]).to have_key(:attributes)
-      expect(response_body[:data][:attributes]).to be_a(Hash)
-      expect(response_body[:data][:attributes].keys.count).to eq(15)
-      expect(response_body[:data][:attributes]).to have_key(:presses)
-      expect(response_body[:data][:attributes][:presses]).to be_an(Array)
-
-      press = response_body[:data][:attributes][:presses]
-
-      expect(press.first[:name_of_publication]).to eq(body[:film_epk][:presses][:name_of_publication])
-      expect(press.first[:description]).to eq(body[:film_epk][:presses][:description])
-      expect(press.first[:link]).to eq(body[:film_epk][:presses][:link])
     end
   end
 end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show]
       resources :awards, only: [:create, :destroy]
       resources :movie_posters, only: [:create]
+      resources :presses, only: [:create, :destroy]
       post '/presigned_url', to: 'direct_upload#create'
     end
   end

@@ -1,20 +1,31 @@
 class Api::V1::PressesController < ApplicationController
-
-  def check(press_params, film_epk)
-    @press_params = press_params
-    @film_epk = film_epk
-    return create if @press_params[:id].nil?
-    return update if !@press_params[:id].nil?
+  
+  def create
+    press = Press.new(press_params)
+    if press.save
+      render json: PressSerializer.new(press)
+    else
+      render json: { error: "An existing Film Epk id is required" }
+    end
   end
 
-  def create 
-    @film_epk.presses.create(@press_params)
-    FilmEpkSerializer.new(@film_epk)
-  end
-
-  # def update 
+  # def update
   #   press = Press.find_by(id: @press_params[:id])
   #   press.update(@press_params)
-  # end 
+  # end
+
+  def destroy
+    press = Press.find_by(id: params[:id])
+    return render json: { error: "Press record does not exist" }, status: :not_found if press.nil?
+    press.destroy
+  end
+
+  private
+
+  def press_params
+    params.
+    require(:press).
+    permit(:name_of_publication, :description, :link, :film_epk_id)
+  end
 
 end

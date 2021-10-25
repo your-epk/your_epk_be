@@ -56,6 +56,6 @@ RSpec.describe 'users API' do
     expect(user_info[:included][0][:type]).to eq("film_epk")
     expect(user_info[:included][0]).to have_key(:attributes)
     expect(user_info[:included][0][:attributes]).to be_a(Hash)
-    expect(user_info[:included][0][:attributes].keys.count).to eq(21)
+    expect(user_info[:included][0][:attributes].keys.count).to eq(22)
   end
 end
