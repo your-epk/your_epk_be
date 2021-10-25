@@ -5,7 +5,7 @@ class Api::V1::FilmFamsController < ApplicationController
     if ff.save
       render json: FilmFamSerializer.new(ff)
     else
-      render json: { error: "An existing Film Epk id is required" }
+      render json: { error: "An existing Film Epk id is required" }, status: :not_found
     end
   end
 
