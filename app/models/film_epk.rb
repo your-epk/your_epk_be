@@ -11,4 +11,10 @@ class FilmEpk < ApplicationRecord
       movie_poster.blob.service_url
     end
   end
+
+  def header_image_url
+    if header_image.attached?
+      header_image.blob.service_url
+    end
+  end
 end

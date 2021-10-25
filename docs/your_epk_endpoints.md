@@ -16,6 +16,8 @@ POST      | `/api/v1/presses` | Create film_epk presses. | [Link](#Update-film-e
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
 PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Storage. | [Link](#asset-aws-s3-upload)
 POST     | `api/v1/movie_posters` | Update a film_epk with a movie poster url. | [Link](#Post-a-movie-poster)
+POST     | `api/v1/header_images` | Update a film_epk with a header image url. | [Link](#Post-a-header-image)
+
 
 ---
 
@@ -871,7 +873,7 @@ body = {
 Upload media asset to AWS S3 cloud service
 
 ```
-PUT /api/v1/<<direct_upload_url>>
+PUT <<direct_upload_url>> (from presigned_url response body)
 ```
 
 ## Headers
@@ -922,7 +924,47 @@ Notes:
 ## Example Request
 
 ```
-POsT /api/v1/movie_posters
+POST /api/v1/movie_posters
+
+body = {
+    "film_epk_id": "1"
+    "blob_signed_id": "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d57ff741221f13e76f879478263c22a0918d812f"
+    }
+}
+
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+{
+    "movie_poster_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/ae330064-d3dd-43c2-8578-a6e740925dd6?response-content-disposition=inline%3B%20filename%3D%22test_upload%22%3B%20filename%2A%3DUTF-8%27%27test_upload&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVGNANJEWSXY6YYDD%2F20211024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211024T195711Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b34be329264520e9eaae673b2ba8126c7dd8db7dc45fd608a867d18bcea3cf46"
+}
+```
+---
+
+# Post a header image
+
+Update film epk with an AWS S3 header image url
+
+```
+Post /api/v1/header_images
+```
+
+Notes:
+- Must provided a film_epk_id in the body
+- blob_signed_id is provided in the presigned_url post response body
+- Note that the response `header_image_url` may comeback much longer than depicted
+
+
+## Example Request
+
+```
+POST /api/v1/header_images
 
 body = {
     "film_epk_id": "1"
