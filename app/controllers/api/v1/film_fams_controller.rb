@@ -15,10 +15,11 @@ class Api::V1::FilmFamsController < ApplicationController
     ff.destroy
   end 
 
-  # def update  
-  #   fam = FilmFam.find_by(id: film_fam_params[:id])
-  #   fam.update(@ff_params)
-  # end 
+  def update  
+    fam = FilmFam.find_by(id: film_fam_params[:id])
+    fam.update(ff_params)
+    render json: FilmFamSerializer.new(ff)
+  end 
 
   private
 
