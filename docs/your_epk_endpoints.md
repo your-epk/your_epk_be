@@ -10,6 +10,8 @@ DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | [
 PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
 POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-award)
 DELETE      | `/api/v1/awards/:id` | Delete an award. | [Link](#delete-film-epk-award)
+POST      | `/api/v1/film_fams` | Create film_epk film_fam. | [Link](#Create-film-epk-film-fam)
+DELETE      | `/api/v1/film_fams/:id` | Delete an film_fam. | [Link](#delete-film-epk-film-fam)
 PATCH(not working)     | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
 PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
 POST      | `/api/v1/presses` | Create film_epk presses. | [Link](#Update-film-epk-presses)
@@ -441,6 +443,82 @@ Example 1:
 
 ---
 
+# Create Film Epk Film Fam
+
+Create film epk film fam.
+
+```
+POST /api/v1/film_fam
+```
+
+Notes:
+- Must have a film_epk_id in the body
+
+## Example Request
+
+```
+POST https://epk-be.herokuapp.com/api/v1/film_fams
+
+body = {
+          "film_fam": {
+            "role": "Director",
+            "first_name": "alec",
+            "last_name": "baldwin",
+            "description": "goofball",
+            "film_epk_id": "80"
+          }
+       }
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": {
+        "id": "3",
+        "type": "film_fam",
+        "attributes": {
+            "role": "Director",
+            "first_name": "alec",
+            "last_name": "baldwin",
+            "description": "goofball",
+            "film_epk_id": 80
+        }
+    }
+}
+
+```
+---
+
+# Delete Film Fam
+
+Delete an film fam record.
+
+```
+DELETE /api/v1/film_fams/:id
+```
+
+Notes:
+-
+
+## Example Request
+
+```
+DELETE https://epk-be.herokuapp.com/api/v1/film_fams/<id>
+```
+
+## Example Response
+
+```
+Status: 204 No Content
+```
+---
 # Create Film Epk Award
 
 Create film epk award.
