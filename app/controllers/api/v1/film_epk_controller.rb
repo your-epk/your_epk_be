@@ -15,10 +15,7 @@ class Api::V1::FilmEpkController < ApplicationController
   def update
     film_epk = FilmEpk.find_by(id: params[:id].to_i)
     film_epk.update(film_epk_params)
-    render json: FilmEpkSerializer.new(film_epk, include: [:awards])
-    # render json: AwardsController.new.check(film_epk_params[:award], film_epk) if film_epk_params[:award]
-    # render json: FilmFamsController.new.check(film_epk_params[:film_fam], film_epk) if film_epk_params[:film_fam]
-    # render json: PressesController.new.check(film_epk_params[:presses], film_epk) if film_epk_params[:presses]
+    render json: FilmEpkSerializer.new(film_epk, include: [:awards, :film_fams, :presses])
   end
 
   def destroy
