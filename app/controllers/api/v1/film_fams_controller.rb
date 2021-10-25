@@ -1,18 +1,31 @@
 class Api::V1::FilmFamsController < ApplicationController
-  def check(film_fam_params, film_epk)
-    @ff_params = film_fam_params
-    @film_epk = film_epk
-    return create if @ff_params[:id].nil?
-    return update if !@ff_params[:id].nil?
-  end
 
   def create
-    @film_epk.film_fams.create(@ff_params)
-    FilmEpkSerializer.new(@film_epk)
+    ff = FilmFam.new(ff_params)
+    if ff.save
+      render json: FilmFamSerializer.new(ff)
+    else
+      render json: { error: "An existing Film Epk id is required" }
+    end
+  end
+
+  def destroy
+    ff = FilmFam.find_by(id: params[:id])
+    return render json: { error: "Film Fam does not exist" }, status: :not_found if ff.nil?
+    ff.destroy
   end 
 
-  def update  
-    fam = FilmFam.find_by(id: film_fam_params[:id])
-    fam.update(@ff_params)
-  end 
+  # def update  
+  #   fam = FilmFam.find_by(id: film_fam_params[:id])
+  #   fam.update(@ff_params)
+  # end 
+
+  private
+
+  def ff_params
+    params.
+    require(:film_fam).
+    permit(:role, :first_name, :last_name, :description, :film_epk_id)
+  end
+
 end 
