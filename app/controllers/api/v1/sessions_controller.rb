@@ -1,9 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
 
-  def index
-    render json: { message: "you did it!" }
-  end
-
   def create
     user = User.find_by(email: session_params[:email].downcase)
 
