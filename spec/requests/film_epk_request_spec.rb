@@ -61,6 +61,22 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:attributes][:distribution]).to eq(nil)
   end
 
+  it 'returns an error if fields not filled out correctly' do 
+    body = {
+      title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
+      user_id: nil,
+     }
+
+    post '/api/v1/film_epk', params: body, as: :json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    error_message = { error: "Please Fill In required Fields" }
+    expect(response_body).to eq(error_message)
+  end 
+
   it 'updates an existing film epk records attributes' do
     body = {
       movie_title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
