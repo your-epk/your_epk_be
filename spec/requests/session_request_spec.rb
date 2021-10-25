@@ -39,4 +39,30 @@ RSpec.describe 'sessions API' do
     expect(user[:data][:attributes]).to have_key(:last_name)
     expect(user[:data][:attributes][:last_name]).to be_a(String)
   end
+
+  it 'returns an error message if the credentials are invalid' do 
+    User.create!(
+      email: "whatever@example.com",
+      first_name: "First",
+      last_name: "Last",
+      password: "password",
+      password_confirmation: "password"
+    )
+
+    body = {
+      email: "Whatever@example.com",
+      password: "alecbaldwin"
+    }
+
+    post '/api/v1/sessions', params: body, as: :json
+    
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    error_message = { error: "The information does not match any records" }
+
+    expect(response_body).to eq(error_message)
+  end 
 end

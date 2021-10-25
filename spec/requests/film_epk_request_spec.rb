@@ -61,6 +61,22 @@ RSpec.describe 'movie details API' do
     expect(movie_detail[:data][:attributes][:distribution]).to eq(nil)
   end
 
+  it 'returns an error if fields not filled out correctly' do 
+    body = {
+      title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
+      user_id: nil,
+     }
+
+    post '/api/v1/film_epk', params: body, as: :json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    error_message = { error: "Please Fill In required Fields" }
+    expect(response_body).to eq(error_message)
+  end 
+
   it 'updates an existing film epk records attributes' do
     body = {
       movie_title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
@@ -226,46 +242,6 @@ RSpec.describe 'movie details API' do
       expect(response_body3[:user_id]).to eq(user.id)
       expect(response_body3).to have_key(:movie_poster_url)
       expect(response_body3[:movie_poster_url]).to be_a(String)
-    end
-  end
-
-  describe "create film_fam" do
-    xit "creates an associated film fam record" do
-      body = {
-        film_epk: {
-          film_fam: {
-            role: "Director",
-            first_name: "Harry",
-            last_name: "Parabols",
-            description: "Runs this shit",
-          }
-        }
-      }
-
-      patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
-
-      expect(response).to be_successful
-      expect(response.status).to eq(200)
-      response_body = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response_body).to have_key(:data)
-      expect(response_body[:data]).to be_a(Hash)
-      expect(response_body[:data].keys.count).to eq(4)
-      expect(response_body[:data]).to have_key(:id)
-      expect(response_body[:data][:id]).to eq(@epk.id.to_s)
-      expect(response_body[:data]).to have_key(:type)
-      expect(response_body[:data][:type]).to eq("film_epk")
-      expect(response_body[:data]).to have_key(:attributes)
-      expect(response_body[:data][:attributes]).to be_a(Hash)
-      expect(response_body[:data][:attributes].keys.count).to eq(15)
-      expect(response_body[:data][:attributes]).to have_key(:film_fams)
-      expect(response_body[:data][:attributes][:film_fams]).to be_an(Array)
-
-      ff = response_body[:data][:attributes][:film_fams]
-
-      expect(ff.first[:role]).to eq(body[:film_epk][:film_fam][:role])
-      expect(ff.first[:first_name]).to eq(body[:film_epk][:film_fam][:first_name])
-      expect(ff.first[:last_name]).to eq(body[:film_epk][:film_fam][:last_name])
     end
   end
 end

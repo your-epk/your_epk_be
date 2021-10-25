@@ -64,6 +64,28 @@ RSpec.describe 'film fam API' do
     expect(film_fam[:data][:attributes][:film_epk_id]).to eq(@epk.id)
   end 
 
+  it 'returns an error with invalid epk id' do
+    body = {
+      film_fam: { 
+        role: "Actor",
+        first_name: "Alec",
+        last_name: "Baldwin",
+        description: "poppa smurfs",
+        film_epk_id: 420
+      }
+    }
+
+    post "/api/v1/film_fams", params: body, as: :json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+
+    error_response = JSON.parse(response.body, symbolize_names: true)
+
+    error_message = { error: "An existing Film Epk id is required" }
+    expect(error_response).to eq(error_message)
+  end 
+
   describe "delete" do
     it "can delete a film fam" do
       delete "/api/v1/film_fams/#{@ff.id}"

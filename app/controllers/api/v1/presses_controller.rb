@@ -5,7 +5,7 @@ class Api::V1::PressesController < ApplicationController
     if press.save
       render json: PressSerializer.new(press)
     else
-      render json: { error: "An existing Film Epk id is required" }
+      render json: { error: "An existing Film Epk id is required" }, status: :not_found
     end
   end
 

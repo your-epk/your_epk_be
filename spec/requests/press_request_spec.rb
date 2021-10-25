@@ -59,6 +59,26 @@ RSpec.describe 'presses API' do
     expect(press_response[:data][:attributes][:film_epk_id]).to eq(@epk.id)
   end
 
+  it 'return error with invalid epk id' do 
+    body = {
+      press: {
+        name_of_publication: "The Paper",
+        description: "We real good",
+        link: "www.thepaper.com"
+      }
+  }
+
+  post "/api/v1/presses", params: body, as: :json
+
+  expect(response).to_not be_successful
+  expect(response.status).to eq(404)
+
+  error_response = JSON.parse(response.body, symbolize_names: true)
+
+  error_message = { error: "An existing Film Epk id is required" }
+  expect(error_response).to eq(error_message)
+  end 
+
   describe "delete" do
     it "deletes an award record by id" do
       delete "/api/v1/presses/#{@press.id}"
