@@ -29,4 +29,8 @@ class FilmEpkSerializer
    attribute :movie_poster_url do |object|
      object.movie_poster_url
    end
+
+   attribute :header_image_url do |object|
+    object.header_image_url
+  end
 end
