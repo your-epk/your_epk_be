@@ -11,6 +11,7 @@ PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#updat
 POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-award)
 DELETE      | `/api/v1/awards/:id` | Delete an award. | [Link](#delete-film-epk-award)
 POST      | `/api/v1/film_fams` | Create film_epk film_fam. | [Link](#Create-film-epk-film-fam)
+PATCH     | `/api/v1/film_fams/:id` | Update film_epk film_fam. | [Link](#Update-film-epk-film-fam)
 DELETE      | `/api/v1/film_fams/:id` | Delete an film_fam. | [Link](#delete-film-epk-film-fam)
 PATCH(not working)     | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
 PATCH(not working)      | `/api/v1/film_epk/:id` | Create film_epk film_fam. | [Link](#Update-film-epk-film-fam)
@@ -514,6 +515,7 @@ DELETE https://epk-be.herokuapp.com/api/v1/awards/<id>
 ```
 Status: 204 No Content
 ```
+---
 # Create Film Epk Film Fam
 
 Create film epk film fam.
@@ -566,7 +568,59 @@ Example 1:
 
 ```
 ---
+# Update Film Epk Film Fam
 
+Update film epk film fam.
+
+```
+PATCH /api/v1/film_fam/24
+```
+
+Notes:
+- Must have a film_epk_id in the body
+
+## Example Request
+
+```
+PATCH https://epk-be.herokuapp.com/api/v1/film_fams/24
+
+body = {
+          "film_fam": {
+            "id": 24
+            "role": "Director",
+            "first_name": "alec",
+            "last_name": "booseldorfinsperg",
+            "description": "goofball",
+            "film_epk_id": "80"
+          }
+       }
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": {
+        "id": "24",
+        "type": "film_fam",
+        "attributes": {
+            "role": "Actor",
+            "first_name": "alec",
+            "last_name": "booseldorfinspreg",
+            "description": "goofball",
+            "film_epk_id": 80
+        }
+    }
+}
+
+```
+---
 # Delete Film Fam
 
 Delete an film fam record.
