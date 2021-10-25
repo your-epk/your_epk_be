@@ -72,5 +72,13 @@ RSpec.describe 'film fam API' do
       expect(response.status).to eq(204)
       expect(FilmFam.all).to eq([])
     end 
+
+    it "can't delete a film fam that doesn't exist" do
+      delete "/api/v1/film_fams/420"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      expect(FilmFam.all).to eq([@ff])
+    end
   end 
 end
