@@ -228,44 +228,4 @@ RSpec.describe 'movie details API' do
       expect(response_body3[:movie_poster_url]).to be_a(String)
     end
   end
-
-  describe "create film_fam" do
-    xit "creates an associated film fam record" do
-      body = {
-        film_epk: {
-          film_fam: {
-            role: "Director",
-            first_name: "Harry",
-            last_name: "Parabols",
-            description: "Runs this shit",
-          }
-        }
-      }
-
-      patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
-
-      expect(response).to be_successful
-      expect(response.status).to eq(200)
-      response_body = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response_body).to have_key(:data)
-      expect(response_body[:data]).to be_a(Hash)
-      expect(response_body[:data].keys.count).to eq(4)
-      expect(response_body[:data]).to have_key(:id)
-      expect(response_body[:data][:id]).to eq(@epk.id.to_s)
-      expect(response_body[:data]).to have_key(:type)
-      expect(response_body[:data][:type]).to eq("film_epk")
-      expect(response_body[:data]).to have_key(:attributes)
-      expect(response_body[:data][:attributes]).to be_a(Hash)
-      expect(response_body[:data][:attributes].keys.count).to eq(15)
-      expect(response_body[:data][:attributes]).to have_key(:film_fams)
-      expect(response_body[:data][:attributes][:film_fams]).to be_an(Array)
-
-      ff = response_body[:data][:attributes][:film_fams]
-
-      expect(ff.first[:role]).to eq(body[:film_epk][:film_fam][:role])
-      expect(ff.first[:first_name]).to eq(body[:film_epk][:film_fam][:first_name])
-      expect(ff.first[:last_name]).to eq(body[:film_epk][:film_fam][:last_name])
-    end
-  end
 end
