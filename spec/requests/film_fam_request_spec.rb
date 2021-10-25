@@ -64,6 +64,25 @@ RSpec.describe 'film fam API' do
     expect(film_fam[:data][:attributes][:film_epk_id]).to eq(@epk.id)
   end 
 
+  it 'can update a film epk' do 
+    body = {
+      film_fam: { 
+        id: @ff.id,
+        role: "dir3ctor",
+        first_name: "Alec",
+        last_name: "Bronson",
+        description: "poppa smurfs",
+        film_epk_id: @epk.id 
+      }
+    }
+
+    patch "/api/v1/film_fams/#{@ff.id}", params: body, as: :json
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+  end 
+
   it 'returns an error with invalid epk id' do
     body = {
       film_fam: { 
