@@ -9,9 +9,11 @@ class Api::V1::AwardsController < ApplicationController
     end
   end
 
-  # def update
-  #   award = Award.find_by(id: award_params[:id])
-  # end
+  def update
+    award = Award.find_by(id: params[:id])
+    award.update(award_params)
+    render json: AwardSerializer.new(award)
+  end
 
   def destroy
     award = Award.find_by(id: params[:id])
