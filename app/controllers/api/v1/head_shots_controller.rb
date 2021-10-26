@@ -5,7 +5,7 @@ class Api::V1::HeadShotsController < ApplicationController
     if !film_fam.nil?
       film_fam.head_shot.attach(head_shot)
 
-      render json: { head_shot_url: film_fam.head_shot_url.as_json }
+      render json: FilmFamSerializer.new(film_fam)
     else
       render json: { error: "An existing Film Fam id is required" }
     end
@@ -15,4 +15,4 @@ class Api::V1::HeadShotsController < ApplicationController
   def hs_params
     params.permit(:blob_signed_id, :film_fam_id)
   end
-end 
+end
