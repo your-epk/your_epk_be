@@ -1139,7 +1139,19 @@ Status: 200 OK
 
 ```
 {
-    "movie_shot_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/ae330064-d3dd-43c2-8578-a6e740925dd6?response-content-disposition=inline%3B%20filename%3D%22test_upload%22%3B%20filename%2A%3DUTF-8%27%27test_upload&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVGNANJEWSXY6YYDD%2F20211024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211024T195711Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b34be329264520e9eaae673b2ba8126c7dd8db7dc45fd608a867d18bcea3cf46"
+    "data": {
+        "id": "1",
+        "type": "film_fam",
+        "attributes": {
+            "role": "Director",
+            "first_name": "Sam",
+            "last_name": "Samison",
+            "description": "Directing for a long time.",
+            "film_epk_id": 1,
+            "head_shot_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/ae330064-d3dd-43c2-8578-a6e740925dd6?response-content-disposition=inline%3B%20filename%3D%22test_upload%22%3B%20filename%2A%3DUTF-8%27%27test_upload&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVGNANJEWSXY6YYDD%2F20211024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211024T195711Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b34be329264520e9eaae673b2ba8126c7dd8db7dc45fd608a867d18bcea3cf46"
+        }
+    }
 }
+
 ```
 ---
