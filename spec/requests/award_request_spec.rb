@@ -21,6 +21,13 @@ RSpec.describe 'awards API' do
       award_type: "Shiny",
       film_epk_id: @epk.id
     )
+
+    @award2 = Award.create!(
+      name: "The Original 2",
+      year: "2022",
+      award_type: "Shiny 2",
+      film_epk_id: @epk.id
+    )
   end
 
   it 'creates a flim epk award' do
@@ -59,7 +66,7 @@ RSpec.describe 'awards API' do
     expect(award_info[:data][:attributes][:film_epk_id]).to eq(@epk.id)
   end
 
-  it 'updates an existing award' do 
+  it 'updates an existing award' do
     body = {
       award: {
         id: @award.id,
@@ -84,7 +91,7 @@ RSpec.describe 'awards API' do
     expect(updated_name).to_not eq(@award.name)
     expect(updated_year).to_not eq(@award.year)
     expect(updated_award_type).to_not eq(@award.award_type)
-  end 
+  end
 
   it "will not create an Award if the Film Epk does not exist" do
     body = {
@@ -111,7 +118,7 @@ RSpec.describe 'awards API' do
 
       expect(response).to be_successful
       expect(response.status).to eq(204)
-      expect(Award.all).to eq([])
+      expect(Award.all).to eq([@award2])
     end
 
     it "returns an error if a delete is attempted for an award that doesn't exist" do
@@ -125,5 +132,17 @@ RSpec.describe 'awards API' do
 
       expect(response_body).to eq(error_message)
     end
+  end
+
+  it "returns all award records for a given Film Epk" do
+    get "/api/v1/film_epk/#{@epk.id}/awards"
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+    award_info = JSON.parse(response.body, symbolize_names: true)
+
+    expect(award_info).to have_key(:data)
+    expect(award_info[:data]).to be_an(Array)
+    expect(award_info[:data].count).to eq(2)
   end
 end

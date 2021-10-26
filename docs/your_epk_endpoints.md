@@ -8,6 +8,7 @@ POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link
 GET       | `/api/v1/film_epk/:id` | Get a film epk's attributes and relationships. | [Link](#get-film-epk)
 DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | [Link](#delete-film-epk)
 PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#update-film-epk)
+GET      | `/api/v1/film_epk/:film_epk_id/awards` | Get all a film_epk's awards. | [Link](#Get-film-epk-awards)
 POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-award)
 DELETE      | `/api/v1/awards/:id` | Delete an award. | [Link](#delete-film-epk-award)
 POST      | `/api/v1/film_fams` | Create film_epk film_fam. | [Link](#Create-film-epk-film-fam)
@@ -442,7 +443,6 @@ Example 1:
 }
 
 ```
-
 ---
 # Create Film Epk Award
 
@@ -490,6 +490,56 @@ Example 1:
             "film_epk_id": 80
         }
     }
+}
+
+```
+---
+# Get Film Epk Awards
+
+Get all of a film epk's awards.
+
+```
+GET /api/v1/film_epk/:film_epk_id/awards
+```
+
+## Example Request
+
+```
+GET https://epk-be.herokuapp.com/api/v1/film_epk/100/awards
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "award",
+            "attributes": {
+                "name": "The Super Award",
+                "year": "1999",
+                "award_type": "Shiny",
+                "film_epk_id": 1
+            }
+        },
+        {
+            "id": "2",
+            "type": "award",
+            "attributes": {
+                "name": "The Super Award",
+                "year": "1999",
+                "award_type": "Shiny",
+                "film_epk_id": 1
+            }
+        }
+    ]
 }
 
 ```

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create]
-      resources :film_epk, only: [:create, :index, :update, :destroy, :show]
+      resources :film_epk, only: [:create, :index, :update, :destroy, :show] do
+        resources :awards, only: [:index]
+      end
       resources :users, only: [:show]
       resources :awards, only: [:create, :destroy, :update]
       resources :movie_posters, only: [:create]

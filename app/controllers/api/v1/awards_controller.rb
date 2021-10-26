@@ -1,5 +1,10 @@
 class Api::V1::AwardsController < ApplicationController
 
+  def index
+    awards = Award.where(film_epk_id: params[:film_epk_id].to_i)
+    render json: AwardSerializer.new(awards)
+  end
+
   def create
     award = Award.new(award_params)
     if award.save
