@@ -69,9 +69,9 @@ RSpec.describe 'film fam API' do
       film_fam: { 
         id: @ff.id,
         role: "dir3ctor",
-        first_name: "Alec",
+        first_name: "Action",
         last_name: "Bronson",
-        description: "poppa smurfs",
+        description: "momma smurfs",
         film_epk_id: @epk.id 
       }
     }
@@ -81,6 +81,17 @@ RSpec.describe 'film fam API' do
     expect(response).to be_successful
     expect(response.status).to eq(200)
 
+    updated_film_fam = JSON.parse(response.body, symbolize_names: true)
+
+    updated_role = updated_film_fam[:data][:attributes][:role]
+    updated_first_name = updated_film_fam[:data][:attributes][:first_name]
+    updated_last_name = updated_film_fam[:data][:attributes][:last_name]
+    updated_description = updated_film_fam[:data][:attributes][:description]
+
+    expect(updated_role).to_not eq(@ff.role)
+    expect(updated_first_name).to_not eq(@ff.first_name)
+    expect(updated_last_name).to_not eq(@ff.last_name)
+    expect(updated_description).to_not eq(@ff.description)
   end 
 
   it 'returns an error with invalid epk id' do
