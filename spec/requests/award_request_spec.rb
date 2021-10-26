@@ -62,7 +62,7 @@ RSpec.describe 'awards API' do
   it 'updates an existing award' do 
     body = {
       award: {
-        id: @award.id
+        id: @award.id,
         name: "The Super Original",
         year: "1666",
         award_type: "rusty",
@@ -70,11 +70,20 @@ RSpec.describe 'awards API' do
       }
     }
 
-    patch "/api/v1/awards", params: body, as: :json
+    patch "/api/v1/awards/#{@award.id}", params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
     award_info = JSON.parse(response.body, symbolize_names: true)
+
+    updated_name = award_info[:data][:attributes][:name]
+    updated_year = award_info[:data][:attributes][:year]
+    updated_award_type = award_info[:data][:attributes][:award_type]
+
+
+    expect(updated_name).to_not eq(@award.name)
+    expect(updated_year).to_not eq(@award.year)
+    expect(updated_award_type).to_not eq(@award.award_type)
   end 
 
   it "will not create an Award if the Film Epk does not exist" do
