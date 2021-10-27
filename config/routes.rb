@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :film_epk, only: [:create, :index, :update, :destroy, :show] do
         resources :awards, only: [:index]
+        resources :film_fams, only: [:index]
+        resources :presses, only: [:index]
       end
       resources :users, only: [:show]
       resources :awards, only: [:create, :destroy, :update]

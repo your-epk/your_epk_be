@@ -11,10 +11,11 @@ PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | [Link](#updat
 GET      | `/api/v1/film_epk/:film_epk_id/awards` | Get all a film_epk's awards. | [Link](#Get-film-epk-awards)
 POST      | `/api/v1/awards` | Create film_epk award. | [Link](#Create-film-epk-award)
 DELETE      | `/api/v1/awards/:id` | Delete an award. | [Link](#delete-film-epk-award)
+GET      | `/api/v1/film_epk/:film_epk_id/film_fams` | Get all a film_epk's film fams. | [Link](#Get-film-epk-film-fams)
 POST      | `/api/v1/film_fams` | Create film_epk film_fam. | [Link](#Create-film-epk-film-fam)
 PATCH     | `/api/v1/film_fams/:id` | Update film_epk film_fam. | [Link](#Update-film-epk-film-fam)
 DELETE      | `/api/v1/film_fams/:id` | Delete an film_fam. | [Link](#delete-film-epk-film-fam)
-PATCH(not working)     | `/api/v1/film_epk/:id` | update film_epk awards. | [Link](#Update-film-epk-awards)
+GET      | `/api/v1/film_epk/:film_epk_id/presses` | Get all a film_epk's press. | [Link](#Get-film-epk-press)
 POST      | `/api/v1/presses` | Create film_epk presses. | [Link](#Update-film-epk-presses)
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
 PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Storage. | [Link](#asset-aws-s3-upload)
@@ -567,6 +568,60 @@ DELETE https://epk-be.herokuapp.com/api/v1/awards/<id>
 Status: 204 No Content
 ```
 ---
+# Get Film Epk Film Fams
+
+Get all of a film epk's awards.
+
+```
+GET /api/v1/film_epk/:film_epk_id/film_fams
+```
+
+## Example Request
+
+```
+GET https://epk-be.herokuapp.com/api/v1/film_epk/100/film_fams
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "film_fam",
+            "attributes": {
+                "role": "Director",
+                "first_name": "Harry",
+                "last_name": "Parabols",
+                "description": "Runs this shit",
+                "film_epk_id": 1,
+                "head_shot_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/99a4a3e3-9380-4f69-ae08-466790419a67?response-content-disposition=inline%3B%20filename%3D%22test_upload%22%3B%20filename%2A%3DUTF-8%27%27test_upload&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVGNANJEWSXY6YYDD%2F20211027%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211027T013804Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b3352ea69356a62bf2db272cf5057b6d41ac0c35ed0d05adcb7cfb83398e23b9"
+            }
+        },
+        {
+            "id": "2",
+            "type": "film_fam",
+            "attributes": {
+                "role": "Director",
+                "first_name": "jj",
+                "last_name": "dorris",
+                "description": "safety coordinator",
+                "film_epk_id": 1,
+                "head_shot_url": null
+            }
+        },
+    ]
+}
+
+```
+---
 # Create Film Epk Film Fam
 
 Create film epk film fam.
@@ -934,6 +989,47 @@ Example 1:
         }
     }
 }
+```
+---
+
+# Get Film Epk Press
+
+Get all of a film press.
+
+```
+GET /api/v1/film_epk/:film_epk_id/presses
+```
+
+## Example Request
+
+```
+GET https://epk-be.herokuapp.com/api/v1/film_epk/100/press
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "press",
+            "attributes": {
+                "name_of_publication": "ExamplePub",
+                "description": "ExampleDesc",
+                "link": "ex.com",
+                "film_epk_id": 1
+            }
+        }
+    ]
+}
+
 ```
 ---
 
