@@ -116,6 +116,18 @@ RSpec.describe 'film fam API' do
     expect(error_response).to eq(error_message)
   end 
 
+  it "returns all film fam records for a given Film Epk" do
+    get "/api/v1/film_epk/#{@epk.id}/film_fams"
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+    award_info = JSON.parse(response.body, symbolize_names: true)
+
+    expect(award_info).to have_key(:data)
+    expect(award_info[:data]).to be_an(Array)
+    expect(award_info[:data].count).to eq(1)
+  end
+
   describe "delete" do
     it "can delete a film fam" do
       delete "/api/v1/film_fams/#{@ff.id}"
