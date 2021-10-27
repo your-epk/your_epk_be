@@ -53,6 +53,8 @@
 
 ## Getting Started
 
+The [Backend Endpoint Docs](https://github.com/your-epk/your_epk_be/blob/main/docs/your_epk_endpoints.md)
+
 The `base path` of each endpoint is:
 
 ```
