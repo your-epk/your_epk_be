@@ -1,5 +1,10 @@
 class Api::V1::FilmFamsController < ApplicationController
 
+  def index
+    ff = FilmFam.where(film_epk_id: params[:film_epk_id].to_i)
+    render json: FilmFamSerializer.new(ff)
+  end 
+
   def create
     ff = FilmFam.new(ff_params)
     if ff.save
