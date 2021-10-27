@@ -1,5 +1,10 @@
 class Api::V1::PressesController < ApplicationController
   
+  def index
+    presses = Press.where(film_epk_id: params[:film_epk_id].to_i)
+    render json: PressSerializer.new(presses)
+  end 
+
   def create
     press = Press.new(press_params)
     if press.save
