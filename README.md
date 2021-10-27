@@ -1,19 +1,22 @@
-## Little Esty Shop
+[![untitled.png](https://i.postimg.cc/t46wNSzd/untitled.png)](https://postimg.cc/k2nTnyzD)
+## Your Epk -(back end)
+
+[Deployed to Heroku](https://travel-buddy-api.herokuapp.com/)
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
-# Welcome to Your-EPK - An Application to host and promote your Film EPKs
-<p align="center">
-  ![Database Schema](https://i.postimg.cc/vmy0hxPc/Screen-Shot-2021-10-18-at-5-04-35-PM.png)](https://postimg.cc/qNmcMqHT)
-</p>
+# Welcome to Your Epk
+  - Your Epk is an electronic press kit builder. This App allows you to build an HTML web page to promote your film project and provide detailed standard promotional materials.
 
-Find the [project spec here](https://github.com/turingschool-examples/little-esty-shop).
 ## Table of Contents
 
 - [Overview](#overview)
 - [Tools Utilized](#tools-used)
+- [Getting Started](#getting-started)
+- [Endpoints](#endpoints)
+- [Database Schema](#database-schema)
 - [Contributing](#contributors)
 
 # README
@@ -21,42 +24,73 @@ Find the [project spec here](https://github.com/turingschool-examples/little-est
 
 ### <ins>Overview</ins>
 
-[Little Esty Shop](https://github.com/bfl3tch/little-esty-shop) is a 10-day, 4 person project, during Mod 2 of 4 for Turing School's Back End Engineering Program.
-
-Our challenge was to build a functioning web app consisting of multiple relational databases to model the popular e-commerce web site *Etsy*.
-
-Learning goals and areas of focus consisted of:
+[Travel Buddy](https://github.com/your-epk/your_epk_be) Your EPK is a 5 person, 2 week capstone project for the final mod of Turing School of Software and Design
 
 - Apply principles of flow control across multiple methods
-- Design a one to many relationship using a schema designer
+- Design a one to many relationship using an API backend application
+- Design a many to many relationship using an API backend application
+- Design self referential relationship using an API backend application
 - Write migrations to create tables with columns of varying data types and foreign keys.
-- Use Rails to create web pages that allow users to CRUD resources
-- Create instance and class methods on a Rails model that use ActiveRecord methods and helpers
+- Use TypeSript and React to design a UI for frontend
 - Write model and feature tests that fully cover data logic and potential user behavior
+- Use AWS S3 to store images on the Cloud
 
 
-### <ins>Tools Used</ins>
-- Ruby 2.7.2
-- TypeScript
-- React
-- React Router
-- Cypress
-- Material UI
-- AWS S3
-- PostgresQL
-- Postico
-- Capybara
-- Launchy
-- Orderly
-- SimpleCov
-- Git/GitHub
-- HTML5
-- SCSS
-- Bootstrap
-- RSpec
-- Pry
-- Atom
-- VS Code
+## Tools Used
+
+| Development       | Testing       | Gems            |
+|   :----:          |    :----:     |    :----:       |
+| Ruby 2.7.2        | RSpec         | Pry             |
+| Rails 5.2.5       | WebMock       | ShouldaMatchers |
+| PostgresSQL       | VCR           | Capybara        |
+| Postico           | Launchy       | Figaro          |
+| VS Code           | SimpleCov     | Faraday         |
+| Github            | Capybara      | aws-sdk-s3      |
+| TypeScript        | FactoryBot    |                 |
+| React             | Cypress       |                 |
+| AWS S3 Cloud Storage |  |  |
+
+
+## Getting Started
+
+The `base path` of each endpoint is:
+
+```
+https://travel-buddy-api.herokuapp.com/api/v1
+```
+
+## Endpoints
+
+The following table presents each API endpoint and its documentation.
+
+Endpoint | Docs/Example
+---------|-------------
+HTTP Verb | Endpoint              | Description                              | 
+----------|-----------------------|------------------------------------------|
+POST       | `/api/v1/sessions` | Get a single user. | 
+GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | 
+POST       | `/api/v1/film_epk` | Create film epk and add movie details. | 
+GET       | `/api/v1/film_epk/:id` | Get a film epk's attributes and relationships. | 
+DELETE       | `/api/v1/film_epk/:id` | Delete film epk and it's dependents. | 
+PATCH     | `/api/v1/film_epk/:id` | Update film_epk attributes. | 
+GET      | `/api/v1/film_epk/:film_epk_id/awards` | Get all a film_epk's awards. | 
+POST      | `/api/v1/awards` | Create film_epk award. | 
+DELETE      | `/api/v1/awards/:id` | Delete an award. | 
+GET      | `/api/v1/film_epk/:film_epk_id/film_fams` | Get all a film_epk's film fams. | 
+POST      | `/api/v1/film_fams` | Create film_epk film_fam. |
+PATCH     | `/api/v1/film_fams/:id` | Update film_epk film_fam. | 
+DELETE      | `/api/v1/film_fams/:id` | Delete an film_fam. | 
+GET      | `/api/v1/film_epk/:film_epk_id/presses` | Get all a film_epk's press. |
+POST      | `/api/v1/presses` | Create film_epk presses. | 
+POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. |
+PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Storage. | 
+POST     | `api/v1/movie_posters` | Update a film_epk with a movie poster url. |
+POST     | `api/v1/header_images` | Update a film_epk with a header image url. |
+POST     | `api/v1/head_shots` | Update a film_fam with a head shot url. |
+
+
+## Database Schema
+![Screen Shot 2021-09-19 at 10 57 04 AM](https://user-images.githubusercontent.com/81600649/133936054-baac51fb-f3f0-4951-86e2-07f431c02253.png)
 
 ### <ins>Contributors</ins>
 
@@ -80,7 +114,6 @@ Learning goals and areas of focus consisted of:
 - Github: [Maria DelSignore](https://github.com/madhaus4)
 - LinkedIn: [Maria DelSignore](https://www.linkedin.com/in/mariadelsignore/)
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/your-epk/your_epk_be.svg?style=flat-square
@@ -93,52 +126,29 @@ Learning goals and areas of focus consisted of:
 [issues-url]: https://github.com/your-epk/your_epk_be/issues
 <!--
 
-
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ... -->
+<!-- Docs -->
+[get-one-user-docs]: /doc/travel_buddy_endpoints.md#get-one-user
+[find-or-create-user-docs]: /doc/travel_buddy_endpoints.md#find-or-create-user
+[get-user-friendships-docs]: /doc/travel_buddy_endpoints.md#get-user-friendships
+[create-user-friendships-docs]: /doc/travel_buddy_endpoints.md#create-user-friendship
+[get-one-trip-docs]: /doc/travel_buddy_endpoints.md#get-one-trip
+[create-user-trip-docs]: /doc/travel_buddy_endpoints.md#create-user-trip
+[update-user-trip-docs]: /doc/travel_buddy_endpoints.md#update-user-trip
+[get-trips-accommodations-docs]: /doc/travel_buddy_endpoints.md#get-trip-accommodations
+[create-trip-accommodation-docs]: /doc/travel_buddy_endpoints.md#create-trip-accommodation
+[get-trips-travel-buddies-docs]: /doc/travel_buddy_endpoints.md#get-trip-travel-buddies
+[create-trip-travel-buddy-docs]: /doc/travel_buddy_endpoints.md#create-trip-travel-buddy
+[get-trip-checklists-docs]: /doc/travel_buddy_endpoints.md#get-trip-checklists
+[create-trip-checklist-docs]: /doc/travel_buddy_endpoints.md#create-trip-checklist
+[create-checklist-item-docs]: /doc/travel_buddy_endpoints.md#create-checklist-item
+[get-parks-by-state-docs]: /doc/travel_buddy_endpoints.md#get-parks-by-state
+[get-parks-by-activity-docs]: /doc/travel_buddy_endpoints.md#get-parks-by-activity
+[get-park-by-parkcode-docs]: /doc/travel_buddy_endpoints.md#get-park-by-parkcode
+[get-weather-docs]: /doc/travel_buddy_endpoints.md#get-weather
 
 
-# Little Esty Shop
 
-## Background and Description
-
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
-
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
-
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
+# Your Epk
 
 ## Setup
 
@@ -151,15 +161,6 @@ This project requires Ruby 2.7.2.
     * `rails db:create`
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
-
-## Phases
-
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
-
-
 
 #### Project Configurations
 
