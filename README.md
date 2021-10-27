@@ -24,7 +24,7 @@
 
 ### <ins>Overview</ins>
 
-[Travel Buddy](https://github.com/your-epk/your_epk_be) Your EPK is a 5 person, 2 week capstone project for the final mod of Turing School of Software and Design
+[Your Epk (Back-End)](https://github.com/your-epk/your_epk_be) Your EPK is a 5 person, 2 week capstone project for the final mod of Turing School of Software and Design
 
 - Apply principles of flow control across multiple methods
 - Design a one to many relationship using an API backend application
@@ -63,8 +63,7 @@ https://travel-buddy-api.herokuapp.com/api/v1
 
 The following table presents each API endpoint and its documentation.
 
-Endpoint | Docs/Example
----------|-------------
+
 HTTP Verb | Endpoint              | Description                              | 
 ----------|-----------------------|------------------------------------------|
 POST       | `/api/v1/sessions` | Get a single user. | 
