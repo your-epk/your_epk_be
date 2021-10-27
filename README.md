@@ -4,9 +4,9 @@
 [![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
-# Welcome to Little Esty - A database driven web application
+# Welcome to Your-EPK - An Application to host and promote your Film EPKs
 <p align="center">
-  [![Screen-Shot-2021-10-18-at-5-04-35-PM.png](https://i.postimg.cc/vmy0hxPc/Screen-Shot-2021-10-18-at-5-04-35-PM.png)](https://postimg.cc/qNmcMqHT)
+  ![Database Schema](https://i.postimg.cc/vmy0hxPc/Screen-Shot-2021-10-18-at-5-04-35-PM.png)](https://postimg.cc/qNmcMqHT)
 </p>
 
 Find the [project spec here](https://github.com/turingschool-examples/little-esty-shop).
