@@ -89,7 +89,7 @@ POST     | `api/v1/head_shots` | Update a film_fam with a head shot url. |
 
 
 ## Database Schema
-![Screen Shot 2021-09-19 at 10 57 04 AM](https://user-images.githubusercontent.com/81600649/133936054-baac51fb-f3f0-4951-86e2-07f431c02253.png)
+[![Screen-Shot-2021-10-18-at-5-04-35-PM.png](https://i.postimg.cc/vmy0hxPc/Screen-Shot-2021-10-18-at-5-04-35-PM.png)](https://postimg.cc/qNmcMqHT)
 
 ### <ins>Contributors</ins>
 
