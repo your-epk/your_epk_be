@@ -1,7 +1,7 @@
-[![untitled.png](https://i.postimg.cc/t46wNSzd/untitled.png)](https://postimg.cc/k2nTnyzD)
+[![untitled-2.png](https://i.postimg.cc/0Nx0qR1Q/untitled-2.png)](https://postimg.cc/pmGFDSTb)
 ## Your Epk -(back end)
 
-[Deployed to Heroku](https://travel-buddy-api.herokuapp.com/)
+[Deployed to Heroku](https://your-epk.herokuapp.com/dashboard/1)
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
