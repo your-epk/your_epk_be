@@ -59,6 +59,18 @@ RSpec.describe 'presses API' do
     expect(press_response[:data][:attributes][:film_epk_id]).to eq(@epk.id)
   end
 
+  it "returns all press records for a given Film Epk" do
+    get "/api/v1/film_epk/#{@epk.id}/presses"
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+    award_info = JSON.parse(response.body, symbolize_names: true)
+
+    expect(award_info).to have_key(:data)
+    expect(award_info[:data]).to be_an(Array)
+    expect(award_info[:data].count).to eq(1)
+  end
+
   it 'return error with invalid epk id' do 
     body = {
       press: {
