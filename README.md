@@ -180,8 +180,8 @@ This project requires Ruby 2.7.2.
 * Database creation
     ```bash
     $ rails db:{drop,create,migrate,seed}
-    Created database 'little_esty_shop_development'
-    Created database 'little_esty_shop_test'
+    Created database 'your_epk_be_development'
+    Created database 'your_epk_be_test'
     ```
 
 
