@@ -56,7 +56,7 @@
 The `base path` of each endpoint is:
 
 ```
-https://travel-buddy-api.herokuapp.com/api/v1
+https://epk-be.herokuapp.com/api/v1/
 ```
 
 ## Endpoints
