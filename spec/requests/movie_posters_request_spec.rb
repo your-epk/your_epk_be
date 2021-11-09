@@ -14,6 +14,16 @@ RSpec.describe 'movie posters API' do
       user_id: @user.id,
       movie_title: "The Best"
     )
+
+    body = {
+      email: "Whatever@example.com",
+      password: "password",
+
+    }
+
+    post '/api/v1/sessions', params: body, as: :json
+    @csrf = response.cookies["CSRF-TOKEN"]
+    @headers_1 = { "X-CSRF-Token": @csrf }
   end
 
   xit 'links a blob_signed_id to a film epk', :vcr do
@@ -48,7 +58,7 @@ RSpec.describe 'movie posters API' do
       blob_signed_id: "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8dc4d32d74dbc0cb2637a87b9d631295cec13138"
     }
 
-    post '/api/v1/movie_posters', params: body3, as: :json
+    post '/api/v1/movie_posters', headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)

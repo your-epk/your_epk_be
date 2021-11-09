@@ -2,20 +2,37 @@ require 'rails_helper'
 
 RSpec.describe 'presigned url API' do
   it 'returns upload link and blob_signed_id', :vcr do
+    user = User.create!(
+      email: "whatever@example.com",
+      first_name: "First",
+      last_name: "Last",
+      password: "password",
+      password_confirmation: "password"
+    )
 
-  body = {
-    file: {
-        filename: "test_upload",
-        byte_size: 92358,
-        checksum: "UCo4+JMJDVuxmSASPcz+Wg==",
-        content_type: "image/jpeg",
-        metadata: {
-            message: "active_storage_test"
+    body1 = {
+      email: "Whatever@example.com",
+      password: "password",
+
+    }
+
+    post '/api/v1/sessions', params: body1, as: :json
+    @csrf = response.cookies["CSRF-TOKEN"]
+    @headers_1 = { "X-CSRF-Token": @csrf }
+
+    body = {
+      file: {
+          filename: "test_upload",
+          byte_size: 92358,
+          checksum: "UCo4+JMJDVuxmSASPcz+Wg==",
+          content_type: "image/jpeg",
+          metadata: {
+              message: "active_storage_test"
+          }
         }
-      }
-  }
+    }
 
-    post '/api/v1/presigned_url', params: body, as: :json
+    post '/api/v1/presigned_url', headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)

@@ -21,6 +21,16 @@ RSpec.describe 'presses API' do
       description: "We extra good",
       link: "www.thegoodone.com",
     )
+
+    body = {
+      email: "Whatever@example.com",
+      password: "password",
+
+    }
+
+    post '/api/v1/sessions', params: body, as: :json
+    @csrf = response.cookies["CSRF-TOKEN"]
+    @headers_1 = { "X-CSRF-Token": @csrf }
   end
 
   it 'creates a flim epk press record' do
@@ -33,7 +43,7 @@ RSpec.describe 'presses API' do
         }
     }
 
-    post "/api/v1/presses", params: body, as: :json
+    post "/api/v1/presses", headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
@@ -80,7 +90,7 @@ RSpec.describe 'presses API' do
       }
   }
 
-  post "/api/v1/presses", params: body, as: :json
+  post "/api/v1/presses", headers: @headers_1, params: body, as: :json
 
   expect(response).to_not be_successful
   expect(response.status).to eq(404)
@@ -93,7 +103,7 @@ RSpec.describe 'presses API' do
 
   describe "delete" do
     it "deletes an award record by id" do
-      delete "/api/v1/presses/#{@press.id}"
+      delete "/api/v1/presses/#{@press.id}", headers: @headers_1, params: body, as: :json
 
       expect(response).to be_successful
       expect(response.status).to eq(204)
@@ -101,7 +111,7 @@ RSpec.describe 'presses API' do
     end
 
     it "returns an error if a delete is attempted for an award that doesn't exist" do
-      delete "/api/v1/presses/27"
+      delete "/api/v1/presses/27", headers: @headers_1, params: body, as: :json
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)

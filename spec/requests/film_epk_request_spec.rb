@@ -14,6 +14,16 @@ RSpec.describe 'movie details API' do
        user_id: @user.id,
        movie_title: "The Best"
      )
+
+     body = {
+      email: "whatever@example.com",
+      password: "password",
+
+    }
+
+    post '/api/v1/sessions', params: body, as: :json
+    @csrf = response.cookies["CSRF-TOKEN"]
+    @headers_1 = { "X-CSRF-Token": @csrf }
   end
 
   it 'creates a film epk' do
@@ -22,7 +32,7 @@ RSpec.describe 'movie details API' do
       user_id: @user.id,
      }
 
-    post '/api/v1/film_epk', params: body, as: :json
+    post '/api/v1/film_epk', headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
@@ -67,7 +77,7 @@ RSpec.describe 'movie details API' do
       user_id: nil,
      }
 
-    post '/api/v1/film_epk', params: body, as: :json
+    post '/api/v1/film_epk', headers: @headers_1, params: body, as: :json
 
     expect(response).to_not be_successful
     expect(response.status).to eq(404)
@@ -91,7 +101,7 @@ RSpec.describe 'movie details API' do
       distribution: "distribution"
      }
 
-    patch "/api/v1/film_epk/#{@epk.id}", params: body, as: :json
+    patch "/api/v1/film_epk/#{@epk.id}", headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
@@ -175,7 +185,7 @@ RSpec.describe 'movie details API' do
     press = Press.create!(film_epk_id: @epk.id)
     film_fam = FilmFam.create!(film_epk_id: @epk.id)
 
-    delete "/api/v1/film_epk/#{@epk.id}"
+    delete "/api/v1/film_epk/#{@epk.id}", headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(204)
