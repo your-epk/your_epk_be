@@ -22,6 +22,16 @@ RSpec.describe 'film fam API' do
       description: "poppa smurfs",
       film_epk_id: @epk.id
     )
+
+    body = {
+      email: "Whatever@example.com",
+      password: "password",
+
+    }
+
+    post '/api/v1/sessions', params: body, as: :json
+    @csrf = response.cookies["CSRF-TOKEN"]
+    @headers_1 = { "X-CSRF-Token": @csrf }
   end 
 
   it 'can create a film fam' do
@@ -35,7 +45,7 @@ RSpec.describe 'film fam API' do
       }
     }
 
-    post "/api/v1/film_fams", params: body, as: :json
+    post "/api/v1/film_fams", headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
@@ -76,7 +86,7 @@ RSpec.describe 'film fam API' do
       }
     }
 
-    patch "/api/v1/film_fams/#{@ff.id}", params: body, as: :json
+    patch "/api/v1/film_fams/#{@ff.id}", headers: @headers_1, params: body, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)
@@ -105,7 +115,7 @@ RSpec.describe 'film fam API' do
       }
     }
 
-    post "/api/v1/film_fams", params: body, as: :json
+    post "/api/v1/film_fams", headers: @headers_1, params: body, as: :json
 
     expect(response).to_not be_successful
     expect(response.status).to eq(404)
@@ -130,7 +140,7 @@ RSpec.describe 'film fam API' do
 
   describe "delete" do
     it "can delete a film fam" do
-      delete "/api/v1/film_fams/#{@ff.id}"
+      delete "/api/v1/film_fams/#{@ff.id}", headers: @headers_1, params: body, as: :json
 
       expect(response).to be_successful
       expect(response.status).to eq(204)
@@ -138,7 +148,7 @@ RSpec.describe 'film fam API' do
     end 
 
     it "can't delete a film fam that doesn't exist" do
-      delete "/api/v1/film_fams/420"
+      delete "/api/v1/film_fams/420", headers: @headers_1, params: body, as: :json
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
