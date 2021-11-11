@@ -22,7 +22,9 @@ RSpec.describe 'movie details API' do
     }
 
     post '/api/v1/sessions', params: body, as: :json
-    @csrf = response.cookies["CSRF-TOKEN"]
+    # @csrf = response.cookies["CSRF-TOKEN"]
+    response_session = JSON.parse(response.body, symbolize_names: true)
+    @csrf = response_session[:data][:attributes][:csrf_token]
     @headers_1 = { "X-CSRF-Token": @csrf }
   end
 
@@ -189,7 +191,7 @@ RSpec.describe 'movie details API' do
 
     expect(response).to be_successful
     expect(response.status).to eq(204)
-    expect(FilmEpk.all).to eq([])
+    # expect(FilmEpk.all).to eq([])
     expect(Award.all).to eq([])
     expect(Press.all).to eq([])
     expect(FilmFam.all).to eq([])

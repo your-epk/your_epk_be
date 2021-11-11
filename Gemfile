@@ -39,6 +39,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'fast_jsonapi'
 gem 'rack-cors'
 gem 'aws-sdk-s3'
+gem 'rails_same_site_cookie'
 
 group :development, :test do
   gem 'pry'
