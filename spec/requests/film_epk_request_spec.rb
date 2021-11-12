@@ -22,9 +22,9 @@ RSpec.describe 'movie details API' do
     }
 
     post '/api/v1/sessions', params: body, as: :json
-    # @csrf = response.cookies["CSRF-TOKEN"]
-    response_session = JSON.parse(response.body, symbolize_names: true)
-    @csrf = response_session[:data][:attributes][:csrf_token]
+    @csrf = response.cookies["CSRF-TOKEN"]
+    # response_session = JSON.parse(response.body, symbolize_names: true)
+    # @csrf = response_session[:data][:attributes][:csrf_token]
     @headers_1 = { "X-CSRF-Token": @csrf }
   end
 

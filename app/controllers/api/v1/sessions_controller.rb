@@ -9,7 +9,7 @@ class Api::V1::SessionsController < ApplicationController
     session[:user_id] = user.id
     csrf_token = form_authenticity_token
     if user.authenticate(session_params[:password])
-      render json: SessionSerializer.new(user, {params: {token: csrf_token}}), status: :ok
+      render json: SessionSerializer.new(user), status: :ok
     else
       render json: {error: "The information does not match any records"}, status: :not_found
     end

@@ -31,7 +31,7 @@ RSpec.describe 'sessions API' do
     expect(user[:data][:type]).to eq("user")
     expect(user[:data]).to have_key(:attributes)
     expect(user[:data][:attributes]).to be_a(Hash)
-    expect(user[:data][:attributes].keys.count).to eq(4)
+    expect(user[:data][:attributes].keys.count).to eq(3)
     expect(user[:data][:attributes]).to have_key(:email)
     expect(user[:data][:attributes][:email]).to eq(body[:email].downcase)
     expect(user[:data][:attributes]).to have_key(:first_name)

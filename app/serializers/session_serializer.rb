@@ -6,7 +6,7 @@ class SessionSerializer
              :first_name,
              :last_name
 
-  attribute :csrf_token do |object, params|
-    params[:token]
-  end
+  # attribute :csrf_token do |object, params|
+  #   params[:token]
+  # end
 end
