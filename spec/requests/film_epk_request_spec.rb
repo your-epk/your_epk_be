@@ -30,7 +30,7 @@ RSpec.describe 'movie details API' do
 
   it 'creates a film epk' do
     body = {
-      title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
+      movie_title: 'Gangsta Squirrel Dragons Attack the Scrumdillyuptious Hippopotamus',
       user_id: @user.id,
      }
 
