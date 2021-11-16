@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         resources :film_fams, only: [:index]
         resources :presses, only: [:index]
       end
-      resources :users, only: [:show]
+      resources :users, only: [:show, :create]
       resources :awards, only: [:create, :destroy, :update]
       resources :movie_posters, only: [:create]
       resources :head_shots, only: [:create]

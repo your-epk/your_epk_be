@@ -58,4 +58,36 @@ RSpec.describe 'users API' do
     expect(user_info[:included][0][:attributes]).to be_a(Hash)
     expect(user_info[:included][0][:attributes].keys.count).to eq(23)
   end
+
+  it 'can create a user' do
+    body = { 
+      email: "googlydoogle@gmizzledizzle.com",
+      first_name: "Alec",
+      last_name: "Baldwin",
+      password: "password",
+      password_confirmation: "password"
+     }
+    post "/api/v1/users", params: body, as: :json
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+    message = JSON.parse(response.body, symbolize_names: true)
+
+    expect(message).to have_key(:success)
+  end
+
+  it 'can create a user' do
+    body = { 
+      email: "googlydoogle@gmizzledizzle.com",
+      first_name: "Alec",
+      last_name: "Baldwin",
+     }
+    post "/api/v1/users", params: body, as: :json
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+    message = JSON.parse(response.body, symbolize_names: true)
+
+    expect(message).to have_key(:)
+  end
 end
