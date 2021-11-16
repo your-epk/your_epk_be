@@ -3,6 +3,7 @@
 HTTP Verb | Endpoint              | Description                              | Link
 ----------|-----------------------|------------------------------------------|---------------------------
 POST       | `/api/v1/sessions` | Get a single user. | [Link](#get-user-session)
+POST        | `/api/v1/users/:id` | Create a user. | [Link](#create-user)
 GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | [Link](#get-user-attributes)
 POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link](#create-film-epk)
 GET       | `/api/v1/film_epk/:id` | Get a film epk's attributes and relationships. | [Link](#get-film-epk)
@@ -188,6 +189,65 @@ Example 1:
             }
         },
     ]
+}
+```
+---
+
+# Create User
+
+Creates a user and returns a user and their attributes and relationships.
+
+```
+POST /api/v1/users
+```
+
+## Body
+
+Name        | Data Type | In    | Required/Optional    | Description
+------------|---------|-------|----------------------|------------
+`user_id`   | Integer | Path | Required | The ID of the user
+
+Notes:
+-
+
+## Example Request
+
+```
+POST https://epk-be.herokuapp.com/api/v1/users
+
+body = {
+    "email": "exorcist@excorsism.com",
+    "first_name": "johnny",
+    "last_name": "sins",
+    "password": "password",
+    "password_confirmation": "password"
+}
+```
+
+## Example Response
+
+```
+Status: 201 OK
+```
+
+```
+Example 1:
+
+{
+    "data": {
+        "id": "7",
+        "type": "user",
+        "attributes": {
+            "email": "exorcist@excorsism.com",
+            "first_name": "johnny",
+            "last_name": "sins"
+        },
+        "relationships": {
+            "film_epks": {
+                "data": []
+            }
+        }
+    }
 }
 ```
 ---
