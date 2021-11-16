@@ -88,6 +88,6 @@ RSpec.describe 'users API' do
     expect(response.status).to eq(404)
     message = JSON.parse(response.body, symbolize_names: true)
 
-    expect(message).to have_key(:)
+    expect(message).to have_key(:error)
   end
 end
