@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
   def create  
     user = User.new(user_params)
     if user.save 
-      render json: { success: "User successfully created"}
+      render json: UserSerializer.new(user), status: :created
     else 
       render json: { error: "Please fill in all required fields"}, status: :not_found
     end 
