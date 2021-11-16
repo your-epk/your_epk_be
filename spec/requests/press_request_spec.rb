@@ -29,7 +29,8 @@ RSpec.describe 'presses API' do
     }
 
     post '/api/v1/sessions', params: body, as: :json
-    @csrf = response.cookies["CSRF-TOKEN"]
+    response_session = JSON.parse(response.body, symbolize_names: true)
+    @csrf = response_session[:data][:attributes][:csrf_token]
     @headers_1 = { "X-CSRF-Token": @csrf }
   end
 
@@ -81,7 +82,7 @@ RSpec.describe 'presses API' do
     expect(award_info[:data].count).to eq(1)
   end
 
-  it 'return error with invalid epk id' do 
+  it 'return error with invalid epk id' do
     body = {
       press: {
         name_of_publication: "The Paper",
@@ -99,7 +100,7 @@ RSpec.describe 'presses API' do
 
   error_message = { error: "An existing Film Epk id is required" }
   expect(error_response).to eq(error_message)
-  end 
+  end
 
   describe "delete" do
     it "deletes an award record by id" do

@@ -30,18 +30,19 @@ RSpec.describe 'film fam API' do
     }
 
     post '/api/v1/sessions', params: body, as: :json
-    @csrf = response.cookies["CSRF-TOKEN"]
-    @headers_1 = { "X-CSRF-Token": @csrf }
-  end 
+    response_session = JSON.parse(response.body, symbolize_names: true)
+    csrf = response_session[:data][:attributes][:csrf_token]
+    @headers_1 = { "X-CSRF-Token": csrf }
+  end
 
   it 'can create a film fam' do
     body = {
-      film_fam: { 
+      film_fam: {
         role: "Actor",
         first_name: "Alec",
         last_name: "Baldwin",
         description: "poppa smurfs",
-        film_epk_id: @epk.id 
+        film_epk_id: @epk.id
       }
     }
 
@@ -72,17 +73,17 @@ RSpec.describe 'film fam API' do
     expect(film_fam[:data][:attributes][:description]).to be_a(String)
     expect(film_fam[:data][:attributes]).to have_key(:film_epk_id)
     expect(film_fam[:data][:attributes][:film_epk_id]).to eq(@epk.id)
-  end 
+  end
 
-  it 'can update a film epk' do 
+  it 'can update a film epk' do
     body = {
-      film_fam: { 
+      film_fam: {
         id: @ff.id,
         role: "dir3ctor",
         first_name: "Action",
         last_name: "Bronson",
         description: "momma smurfs",
-        film_epk_id: @epk.id 
+        film_epk_id: @epk.id
       }
     }
 
@@ -102,11 +103,11 @@ RSpec.describe 'film fam API' do
     expect(updated_first_name).to_not eq(@ff.first_name)
     expect(updated_last_name).to_not eq(@ff.last_name)
     expect(updated_description).to_not eq(@ff.description)
-  end 
+  end
 
   it 'returns an error with invalid epk id' do
     body = {
-      film_fam: { 
+      film_fam: {
         role: "Actor",
         first_name: "Alec",
         last_name: "Baldwin",
@@ -124,7 +125,7 @@ RSpec.describe 'film fam API' do
 
     error_message = { error: "An existing Film Epk id is required" }
     expect(error_response).to eq(error_message)
-  end 
+  end
 
   it "returns all film fam records for a given Film Epk" do
     get "/api/v1/film_epk/#{@epk.id}/film_fams"
@@ -145,7 +146,7 @@ RSpec.describe 'film fam API' do
       expect(response).to be_successful
       expect(response.status).to eq(204)
       expect(FilmFam.all).to eq([])
-    end 
+    end
 
     it "can't delete a film fam that doesn't exist" do
       delete "/api/v1/film_fams/420", headers: @headers_1, params: body, as: :json
@@ -154,5 +155,5 @@ RSpec.describe 'film fam API' do
       expect(response.status).to eq(404)
       expect(FilmFam.all).to eq([@ff])
     end
-  end 
+  end
 end
