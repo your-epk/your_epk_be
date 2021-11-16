@@ -12,15 +12,15 @@ RSpec.describe 'presigned url API' do
 
     body1 = {
       email: "Whatever@example.com",
-      password: "password",
-
+      password: "password"
     }
 
     post '/api/v1/sessions', params: body1, as: :json
-    @csrf = response.cookies["CSRF-TOKEN"]
-    @headers_1 = { "X-CSRF-Token": @csrf }
+    response_session = JSON.parse(response.body, symbolize_names: true)
+    csrf = response_session[:data][:attributes][:csrf_token]
+    @headers_1 = { "X-CSRF-Token": csrf }
 
-    body = {
+    body2 = {
       file: {
           filename: "test_upload",
           byte_size: 92358,
@@ -32,7 +32,7 @@ RSpec.describe 'presigned url API' do
         }
     }
 
-    post '/api/v1/presigned_url', headers: @headers_1, params: body, as: :json
+    post '/api/v1/presigned_url', headers: @headers_1, params: body2, as: :json
 
     expect(response).to be_successful
     expect(response.status).to eq(200)

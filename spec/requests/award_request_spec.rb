@@ -36,12 +36,13 @@ RSpec.describe 'awards API' do
     }
 
     post '/api/v1/sessions', params: body, as: :json
-    @csrf = response.cookies["CSRF-TOKEN"]
-    @headers_1 = { "X-CSRF-Token": @csrf }
+    response_session = JSON.parse(response.body, symbolize_names: true)
+    csrf = response_session[:data][:attributes][:csrf_token]
+    @headers_1 = { "X-CSRF-Token": csrf }
   end
 
   it 'creates a flim epk award' do
-    
+
     body = {
         award: {
           name: "The Super Award",
