@@ -3,7 +3,7 @@
 HTTP Verb | Endpoint              | Description                              | Link
 ----------|-----------------------|------------------------------------------|---------------------------
 POST       | `/api/v1/sessions` | Get a single user. | [Link](#get-user-session)
-POST        | `/api/v1/users/:id` | Create a user. | [Link](#create-user)
+POST        | `/api/v1/users` | Create a user. | [Link](#create-user)
 GET        | `/api/v1/users/:id` | Get a single users attributes and relationships. | [Link](#get-user-attributes)
 POST       | `/api/v1/film_epk` | Create film epk and add movie details. | [Link](#create-film-epk)
 GET       | `/api/v1/film_epk/:id` | Get a film epk's attributes and relationships. | [Link](#get-film-epk)
@@ -205,7 +205,11 @@ POST /api/v1/users
 
 Name        | Data Type | In    | Required/Optional    | Description
 ------------|---------|-------|----------------------|------------
-`user_id`   | Integer | Path | Required | The ID of the user
+`email`   | String | Body | Required | The email of the user
+`first_name`   | String | Body | Required | The first name of the user
+`last_name`   | String | Body | Required | The last name of the user
+`password`   | String | Body | Required | The password of the user
+`password_confirmation`   | String | Body | Required | The password of the user
 
 Notes:
 -
