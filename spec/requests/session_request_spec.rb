@@ -64,5 +64,5 @@ RSpec.describe 'sessions API' do
     error_message = { error: "The information does not match any records" }
 
     expect(response_body).to eq(error_message)
-  end
+  end 
 end
