@@ -8,23 +8,22 @@ RSpec.describe 'movie details API' do
        last_name: "Last",
        password: "password",
        password_confirmation: "password"
-     )
+    )
 
-     @epk = FilmEpk.create!(
-       user_id: @user.id,
-       movie_title: "The Best"
-     )
+    @epk = FilmEpk.create!(
+      user_id: @user.id,
+      movie_title: "The Best"
+    )
 
-     body = {
+    body = {
       email: "whatever@example.com",
-      password: "password",
-
+      password: "password"
     }
 
     post '/api/v1/sessions', params: body, as: :json
     response_session = JSON.parse(response.body, symbolize_names: true)
-    @csrf = response_session[:data][:attributes][:csrf_token]
-    @headers_1 = { "X-CSRF-Token": @csrf }
+    csrf = response_session[:data][:attributes][:csrf_token]
+    @headers_1 = { "X-CSRF-Token": csrf }
   end
 
   it 'creates a film epk' do
