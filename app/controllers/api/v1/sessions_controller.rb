@@ -15,6 +15,10 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session[:user_id] = nil
+  end
+
   private
 
   def session_params
