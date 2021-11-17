@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create]
+      delete '/sessions', to: 'sessions#destroy'
       resources :film_epk, only: [:create, :index, :update, :destroy, :show] do
         resources :awards, only: [:index]
         resources :film_fams, only: [:index]
@@ -18,6 +19,11 @@ Rails.application.routes.draw do
       resources :header_images, only: [:create]
       resources :presses, only: [:create, :destroy]
       post '/presigned_url', to: 'direct_upload#create'
+    end
+
+    namespace :v2 do
+      get '/user', to: 'users#show'
+      resources :users, only: [:create]
     end
   end
 end
