@@ -22,8 +22,9 @@ Rails.application.routes.draw do
     end
 
     namespace :v2 do
-      get '/user', to: 'users#show'
+      resource :user, only: [:show]
       resources :users, only: [:create]
+      resources :film_epk, only: [:create, :index, :update, :destroy, :show]
     end
   end
 end
