@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :sessions, only: [:create]
-      delete '/sessions', to: 'sessions#destroy'
+      resource :sessions, only: [:create, :destroy]
+      # delete '/sessions', to: 'sessions#destroy'
       resources :film_epk, only: [:create, :index, :update, :destroy, :show] do
         resources :awards, only: [:index]
         resources :film_fams, only: [:index]

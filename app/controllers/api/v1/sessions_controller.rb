@@ -6,8 +6,6 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: session_params[:email].downcase)
-    session[:user_id] = user.id
-    csrf_token = form_authenticity_token
     if user.authenticate(session_params[:password])
       render json: SessionSerializer.new(user, {params: {token: csrf_token}}), status: :ok
     else
