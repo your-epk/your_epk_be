@@ -5,7 +5,7 @@ class Api::V2::FilmEpkController < ApplicationController
     epk = current_user.film_epks.new(film_epk_params)
 
     if epk.save
-      render json: FilmEpkSerializer.new(epk, include: [:awards, :presses, :film_fams]), status: :ok
+      render json: FilmEpkSerializer.new(epk, include: [:awards, :presses, :film_fams, :film_stills]), status: :ok
     else
       render json: {error: "Please Fill In required Fields"}, status: :not_found
     end
@@ -14,7 +14,7 @@ class Api::V2::FilmEpkController < ApplicationController
   def update
     film_epk = FilmEpk.find_by(id: params[:id].to_i)
     film_epk.update(film_epk_params)
-    render json: FilmEpkSerializer.new(film_epk, include: [:awards, :film_fams, :presses])
+    render json: FilmEpkSerializer.new(film_epk, include: [:awards, :film_fams, :presses, :film_stills])
   end
 
   def destroy
@@ -24,7 +24,7 @@ class Api::V2::FilmEpkController < ApplicationController
 
   def show
     film_epk = FilmEpk.find(params[:id].to_i)
-    render json: FilmEpkSerializer.new(film_epk, include: [:awards, :film_fams, :presses])
+    render json: FilmEpkSerializer.new(film_epk, include: [:awards, :film_fams, :presses, :film_stills])
   end
 
   private

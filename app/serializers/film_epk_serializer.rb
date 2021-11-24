@@ -3,6 +3,8 @@ class FilmEpkSerializer
   has_many :awards
   has_many :presses
   has_many :film_fams
+  has_many :film_stills
+
   set_type :film_epk
   attributes :user_id,
              :movie_title,

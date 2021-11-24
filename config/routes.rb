@@ -12,6 +12,8 @@ Rails.application.routes.draw do
         resources :presses, only: [:index]
       end
       resources :users, only: [:show, :create]
+      resources :film_stills, only: [:create]
+      resources :film_still_images, only: [:create]
       resources :awards, only: [:create, :destroy, :update]
       resources :movie_posters, only: [:create]
       resources :head_shots, only: [:create]
