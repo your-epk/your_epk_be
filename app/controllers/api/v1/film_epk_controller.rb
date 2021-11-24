@@ -5,7 +5,7 @@ class Api::V1::FilmEpkController < ApplicationController
 
     epk = FilmEpk.new(film_epk_params)
     csrf_token = form_authenticity_token
-require "pry"; binding.pry
+
     if epk.save
       render json: FilmEpkSerializer.new(epk, include: [:awards]), status: :ok
     else
