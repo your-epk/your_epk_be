@@ -16,6 +16,7 @@ GET      | `/api/v1/film_epk/:film_epk_id/film_fams` | Get all a film_epk's film
 POST      | `/api/v1/film_fams` | Create film_epk film_fam. | [Link](#Create-film-epk-film-fam)
 PATCH     | `/api/v1/film_fams/:id` | Update film_epk film_fam. | [Link](#Update-film-epk-film-fam)
 DELETE      | `/api/v1/film_fams/:id` | Delete an film_fam. | [Link](#delete-film-epk-film-fam)
+POST      | `/api/v1/film_stills` | Create film_epk film_still. | [Link](#Create-film-epk-film-still)
 GET      | `/api/v1/film_epk/:film_epk_id/presses` | Get all a film_epk's press. | [Link](#Get-film-epk-press)
 POST      | `/api/v1/presses` | Create film_epk presses. | [Link](#Update-film-epk-presses)
 POST       | `api/v1/presigned_url` | Provides the AWS S3 upload url and blob_signed_id. | [Link](#retrieve-aws-s3-upload-link)
@@ -23,6 +24,8 @@ PUT        | `api/v1/<<direct_upload_url>>` | Uploads Asset to AWS S3 Cloud Stor
 POST     | `api/v1/movie_posters` | Update a film_epk with a movie poster url. | [Link](#Post-a-movie-poster)
 POST     | `api/v1/header_images` | Update a film_epk with a header image url. | [Link](#Post-a-header-image)
 POST     | `api/v1/head_shots` | Update a film_fam with a head shot url. | [Link](#Post-a-head-shot)
+POST     | `api/v1/film_stills` | Update a film_still with an image url. | [Link](#Post-a-film-still)
+
 
 
 
@@ -814,6 +817,51 @@ DELETE https://epk-be.herokuapp.com/api/v1/film_fams/<id>
 Status: 204 No Content
 ```
 ---
+# Create Film Epk Film Still
+
+Create film epk film Still.
+
+```
+POST /api/v1/film_stills
+```
+
+Notes:
+- Must have a film_still_id in the body
+
+## Example Request
+
+```
+POST https://epk-be.herokuapp.com/api/v1/film_stills
+
+body = {
+    "description": "image description",
+    "film_epk_id": "1"
+}
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+Example 1:
+
+{
+    "data": {
+        "id": "2",
+        "type": "film_still",
+        "attributes": {
+            "description": "image description",
+            "film_epk_id": 1,
+            "film_still_url": null
+        }
+    }
+}
+
+```
+---
 
 # Update Film Epk Awards
 
@@ -1365,3 +1413,50 @@ Status: 200 OK
 
 ```
 ---
+
+# Post a film still
+
+Update film still with an AWS S3 image url
+
+```
+Post /api/v1/film_still_images
+```
+
+Notes:
+- Must provided a film_still_id in the body
+- blob_signed_id is provided in the presigned_url post response body
+
+## Example Request
+
+```
+POST /api/v1/film_still_images
+
+{
+        "film_still_id": "1",
+        "blob_signed_id": "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b74f6864cc6634e12f8cf70f51aad3f883634a0e"
+}
+
+```
+
+## Example Response
+
+```
+Status: 200 OK
+```
+
+```
+{
+    "data": {
+        "id": "1",
+        "type": "film_still",
+        "attributes": {
+            "description": "image description",
+            "film_epk_id": 1,
+            "film_still_url": "https://your-epk-development.s3.us-west-2.amazonaws.com/uploads/ef8e2303-e0d9-4c38-a4be-539d264b0a8f?response-content-disposition=inline%3B%20filename%3D%22film_upload%22%3B%20filename%2A%3DUTF-8%27%27film_upload&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVGNANJEWSXY6YYDD%2F20211124%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211124T225050Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=391371f7ae5cb6120660dffd2faa0915d5ab937d451ea4feecdec9ba09e53adc"
+        }
+    }
+}
+
+```
+---
+
