@@ -1,4 +1,4 @@
-class Api::V1::FilmStillController < ApplicationController
+class Api::V1::FilmStillsController < ApplicationController
 
   def create
     still = FilmStill.new(movie_still_params)
@@ -13,7 +13,7 @@ class Api::V1::FilmStillController < ApplicationController
   def movie_still_params
     params.
     require(:film_still).
-    permit(:description, 
+    permit(:description,
            :film_epk_id)
   end
-end 
+end

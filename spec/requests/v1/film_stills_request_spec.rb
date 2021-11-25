@@ -60,7 +60,7 @@ RSpec.describe 'film stills API' do
     expect(film_still[:data]).to have_key(:id)
     expect(film_still[:data][:id]).to be_a(String)
     expect(film_still[:data]).to have_key(:type)
-    expect(film_still[:data][:type]).to eq("film_stills")
+    expect(film_still[:data][:type]).to eq("film_still")
     expect(film_still[:data]).to have_key(:attributes)
     expect(film_still[:data][:attributes]).to be_a(Hash)
     expect(film_still[:data][:attributes].keys.count).to eq(3)
