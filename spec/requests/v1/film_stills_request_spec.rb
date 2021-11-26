@@ -23,7 +23,7 @@ RSpec.describe 'film stills API' do
       film_epk_id: @epk.id
     )
 
-    @fl = FilmStill.create!(
+    @fs = FilmStill.create!(
       description: "This is a picture of Alec Balwdin",
       film_epk_id: @epk.id
     )
@@ -39,7 +39,7 @@ RSpec.describe 'film stills API' do
     @headers_1 = { "X-CSRF-Token": csrf }
   end
 
-  it 'can create a still' do
+  it 'can create a film still' do
     body = {
       film_still: {
         description: "Alec post gunshot",
@@ -70,6 +70,52 @@ RSpec.describe 'film stills API' do
     expect(film_still[:data][:attributes][:film_epk_id]).to eq(@epk.id)
     expect(film_still[:data][:attributes]).to have_key(:film_still_url)
     expect(film_still[:data][:attributes][:film_still_url]).to eq(nil)
+  end
+
+  it 'can get all of the film stills associated with a film epk' do
+    get "/api/v1/film_epk/#{@epk.id}/film_stills", headers: @headers_1
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    film_still = JSON.parse(response.body, symbolize_names: true)
+
+    expect(film_still).to have_key(:data)
+    expect(film_still[:data]).to be_an(Array)
+    expect(film_still[:data].length).to eq(1)
+    expect(film_still[:data][0]).to have_key(:id)
+    expect(film_still[:data][0][:id]).to be_a(String)
+    expect(film_still[:data][0]).to have_key(:type)
+    expect(film_still[:data][0][:type]).to eq("film_still")
+    expect(film_still[:data][0]).to have_key(:attributes)
+    expect(film_still[:data][0][:attributes]).to be_a(Hash)
+    expect(film_still[:data][0][:attributes].keys.count).to eq(3)
+    expect(film_still[:data][0][:attributes]).to have_key(:description)
+    expect(film_still[:data][0][:attributes][:description]).to be_a(String)
+    expect(film_still[:data][0][:attributes]).to have_key(:film_epk_id)
+    expect(film_still[:data][0][:attributes][:film_epk_id]).to eq(@epk.id)
+    expect(film_still[:data][0][:attributes]).to have_key(:film_still_url)
+    expect(film_still[:data][0][:attributes][:film_still_url]).to eq(nil)
+  end
+
+  describe "delete" do
+    it "can delete a film still" do
+      delete "/api/v1/film_stills/#{@fs.id}", headers: @headers_1
+
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+      expect(FilmStill.all).to eq([])
+    end
+
+    it "can't delete a film fam that doesn't exist" do
+      no_fl = FilmStill.last.id + 1
+
+      delete "/api/v1/film_stills/#{no_fl}", headers: @headers_1
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      expect(FilmStill.all).to eq([@fs])
+    end
   end
 
   # it 'can update a film epk' do
