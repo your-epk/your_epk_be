@@ -1,4 +1,13 @@
-[![untitled-2.png](https://i.postimg.cc/0Nx0qR1Q/untitled-2.png)](https://postimg.cc/pmGFDSTb)
+[![your_epk_presentation_clip](https://user-images.githubusercontent.com/81139173/143939034-b0002299-4d06-4593-b5cb-c4939837b21a.gif)](https://youtu.be/4KU6qd8Axis)
+<!--
+<p align="center">
+  <a href="https://youtu.be/4KU6qd8Axis" target="_blank">
+    <img src="https://user-images.githubusercontent.com/81139173/143939034-b0002299-4d06-4593-b5cb-c4939837b21a.gif" alt="Watch the video" />
+  </a>
+</p>
+-->
+
+<!-- [![untitled-2.png](https://i.postimg.cc/0Nx0qR1Q/untitled-2.png)](https://postimg.cc/pmGFDSTb) -->
 ## Your Epk -(back end)
 
 [Deployed to Heroku](https://your-epk.herokuapp.com/dashboard/1)
